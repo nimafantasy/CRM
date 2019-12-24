@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="182e397be5ef433d8c18af07f0253b9d" Name="Diagram1">
+        <EntityTypeShape EntityType="CRMModel.Tbl_ChangeSoftware" Width="1.5" PointX="5.25" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Customer" Width="1.5" PointX="8.25" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Customer_Products" Width="1.5" PointX="13.5" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_CustomerField" Width="1.5" PointX="6" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_DeviceFailure" Width="1.5" PointX="10.5" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_GetDevice" Width="1.5" PointX="13.5" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Group" Width="1.5" PointX="5.25" PointY="52.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Group_Activity" Width="1.5" PointX="7.5" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Hardware" Width="1.5" PointX="16.5" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_HardwareType" Width="1.5" PointX="7.5" PointY="53.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Installation" Width="1.5" PointX="10.5" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Log" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_MainActivity" Width="1.5" PointX="3" PointY="57.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_OtherRequest" Width="1.5" PointX="13.5" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Payment" Width="1.5" PointX="13.5" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_PreInvoice" Width="1.5" PointX="16.5" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_PreInvoiceType" Width="1.5" PointX="14.25" PointY="47.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Products" Width="1.5" PointX="5.25" PointY="60.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_RequestType" Width="1.5" PointX="5.25" PointY="64" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_ReturnRepairedDevice" Width="1.5" PointX="16.5" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Section" Width="1.5" PointX="0.75" PointY="43.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_SendToRepair" Width="1.5" PointX="19.5" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Software" Width="1.5" PointX="15.75" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_SoftwareType" Width="1.5" PointX="10.5" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_SubActivity" Width="1.5" PointX="5.25" PointY="57.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_SupportServices" Width="1.5" PointX="13.5" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_Training" Width="1.5" PointX="19.5" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_User" Width="1.5" PointX="3" PointY="40.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRMModel.Tbl_User_Group" Width="1.5" PointX="10.5" PointY="47.75" IsExpanded="true" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_ChangeSoftware_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_ChangeSoftware_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Customer_Products_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Customer_Tbl_CustomerField" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Customer_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_DeviceFailure_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_GetDevice_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Hardware_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Installation_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_OtherRequest_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Payment_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_PreInvoice_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_ReturnRepairedDevice_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SendToRepair_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Software_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SupportServices_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Training_Tbl_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Customer_Products_Tbl_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_DeviceFailure_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_GetDevice_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Group_Activity_Tbl_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Group_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_User_Group_Tbl_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Group_Activity_Tbl_SubActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Group_Activity_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Hardware_Tbl_HardwareType" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Hardware_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_HardwareType_Tbl_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_HardwareType_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Installation_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SubActivity_Tbl_MainActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_OtherRequest_Tbl_RequestType" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_OtherRequest_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Payment_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_PreInvoice_Tbl_PreInvoiceType" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_PreInvoice_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Products_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SoftwareType_Tbl_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_RequestType_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_ReturnRepairedDevice_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_User_Tbl_Section" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SendToRepair_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Software_Tbl_SoftwareType" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Software_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SoftwareType_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_SupportServices_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_Training_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_User_Group_Tbl_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CRMModel.FK_Tbl_User_Group_Tbl_User1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

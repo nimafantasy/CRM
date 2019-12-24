@@ -1,0 +1,640 @@
+﻿@using SohaCRM.Models.CustomerProducts;
+@using Web.Framework.UI;
+@using Web.Framework;
+
+@model CustomerProductsListModel
+
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = 10;
+
+    //page title
+    ViewBag.Title = "ثبت محصولات مشتری";
+    //active menu item (system name)
+    //Html.SetActiveMenuItemSystemName("Log");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            امور مشتریان
+        </h1>
+    </div>
+    <div class="jumbotron">
+        <table style="width: 100%; height:100%">
+            <tr style="width: 100%; height:20%">
+                <td style="width:20%; height:20%">
+                    <label ID="Lbl_1" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_1
+                    </label>
+                </td>
+                <td style="width:60%; height:60%">
+                    <label ID="Lbl_2" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_2
+                    </label>
+                </td>
+                <td style="width:20%; height:20%">
+                    <label ID="Lbl_3" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_3
+                    </label>
+                </td>
+            </tr>
+            <tr style="width: 100%; height:60%">
+                <td style="width:20%; height:20%"></td>
+                <td style="width:60%; height:60%">
+                    <div style="border-color:lightslategrey; border:double; border-width:1px; width:100%; height:auto; background-color:#eeeeee;">
+                        <fieldset style="margin-right:10px">
+                            <legend style="text-align:right; font-family:nazanin; font-size:large;">ثبت محصولات مشتری</legend>
+                            <table style="width:100%; height:100%">
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_5" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_5
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.Customer_ID, new { style = "visibility:hidden; width:0px;" })
+                                        @Html.TextBoxFor(m => m.Products_ID, new { style = "visibility:hidden; width:0px;" })
+                                    </td>
+                                    <td style="width:100px; height:40px">
+                                        <label ID="Lbl_7"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:100px; visibility:hidden;">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_8" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_8
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.CustomerName, new { @readonly = true, style = "text-align: right; font-family:'B Nazanin'; width:220px; height:25px;", tabindex = 1})
+                                    </td>
+                                    <td style="width:100px; height:40px">
+                                        <label ID="Lbl_GroupName"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:100px;">
+                                            : نام مشتری
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_9" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_9
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:60%; height:60%">
+                                        <label ID="Lbl_22" Width="85px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_22
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:60%; height:60%">
+                                        <label ID="Lbl_23" Width="85px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_23
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:70px">
+                                        <label ID="Lbl_25" Width="40px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_25
+                                        </label>
+                                    </td>
+                                    <td style="width:300px">
+                                        <div class="panel panel-default" style="direction:rtl; text-align:center; font-family:nazanin; font-size:medium;">
+                                            <div class="panel-body">
+                                                <div id="products-grid" style="overflow-y:scroll;"></div>
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#products-grid").kendoGrid({
+                                                            dataSource: {
+                                                                type: "json",
+                                                                transport: {
+                                                                    read: {
+                                                                        url: "@Html.Raw(Url.Action("ProductList", "Customer"))",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: additionalData
+                                                                    }
+                                                                },
+                                                                schema: {
+                                                                    data: "Data",
+                                                                    total: "Total",
+                                                                    errors: "Errors"
+                                                                },
+                                                                error: function (e) {
+                                                                    display_kendoui_grid_error(e);
+                                                                    // Cancel the changes
+                                                                    this.cancelChanges();
+                                                                },
+                                                                pageSize: @(defaultGridPageSize),
+                                                                serverPaging: true,
+                                                                serverFiltering: true,
+                                                                serverSorting: true
+                                                            },
+                                                            pageable: {
+                                                                refresh: true,
+                                                                pageSizes: [@(gridPageSizes)],
+                                                                @Html.Partial("_GridPagerMessages")
+                                                            },
+                                                            height: 400,
+                                                            scrollable: false,
+                                                            selectable: true,
+                                                            pageable: false,
+                                                            dataBound: onDataBound,
+                                                            columns: [
+                                                                {
+                                                                    field: "Products_ID",
+                                                                    hidden: true
+                                                                },
+                                                                {
+                                                                    field: "ProductsName",
+                                                                    title: "محصولات شرکت",
+                                                                    width: 200
+                                                                }
+                                                            ],
+                                                            change:
+                                                            function () {
+                                                                var selectedRows = this.select();
+                                                                var rowData = this.dataItem(selectedRows[0]);
+                                                                $('#Products_ID').val(rowData.Products_ID);
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                <script type="text/javascript">
+                            var selectedIds = [];
+
+                            $(document).ready(function() {
+                                //search button
+                                
+
+                                @*$("#@Html.FieldIdFor(model => model.Message)").keydown(function(event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-log").click();
+                                        return false;
+                                    }
+                                });*@
+
+                            });
+
+                            @*function additionalData() {
+                                var data = {
+                                    CreatedOnFrom: $('#@Html.FieldIdFor(model => model.CreatedOnFrom)').val(),
+                                    CreatedOnTo: $('#@Html.FieldIdFor(model => model.CreatedOnTo)').val(),
+                                    Message: $('#@Html.FieldIdFor(model => model.Message)').val(),
+                                    LogLevelId: $('#@Html.FieldIdFor(model => model.LogLevelId)').val()
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }*@
+
+                            function onDataBound(e) {
+                                $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function() {
+                                    var currentId = $(this).val();
+                                    var checked = jQuery.inArray(currentId, selectedIds);
+                                    //set checked based on if current checkbox's value is in selectedIds.
+                                    $(this).attr('checked', checked > -1);
+                                });
+
+                                updateMasterCheckbox();
+                            }
+
+                            function updateMasterCheckbox() {
+                                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                                var numChkBoxesChecked = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                            }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label ID="Lbl_26" Width="15px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_26
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr style="height:35px;">
+                                                <td style="text-align:center;">
+                                                    <button id="Btn_add" class="btn btn-primary btn-box-tool" style="width:25px; height:25px;">
+                                                        <span style="font-family:nazanin; font-size:large; font-weight:bold; color:white">
+                                                            >
+                                                        </span>
+                                                    </button>
+                                                    @*<input id="Btn_add" type="button" value=">" style="width:25px; height:25px; font-family:'B Nazanin'; font-size:large; margin-left: 6px;" />*@
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align:center;">
+                                                    <button id="Btn_addAll" class="btn btn-primary btn-box-tool" style="width:40px; height:25px;">
+                                                        <span style="font-family:nazanin; font-size:large; font-weight:bold; color:white">
+                                                            >>
+                                                        </span>
+                                                    </button>
+                                                    @*<input id="Btn_addAll" type="button" value=">>" style="width:40px; height:25px; font-family:'B Nazanin'; font-size:large;" />*@
+                                                </td>
+                                            </tr>
+                                            @*<tr>
+                                                <td>
+                                                    <label ID="Lbl_26" Width="50px"
+                                                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                        test_26
+                                                    </label>
+                                                </td>
+                                            </tr>*@
+                                            <tr style="height:35px;">
+                                                <td style="text-align:center;">
+                                                    <button id="Btn_delete" class="btn btn-primary btn-box-tool" style="width:25px; height:25px;">
+                                                        <span style="font-family:nazanin; font-size:large; font-weight:bold; color:white">
+                                                            <
+                                                        </span>
+                                                    </button>
+                                                    @*<input id="Btn_delete" type="button" value="<" style="width:25px; height:25px; font-family:'B Nazanin'; font-size:large; margin-left: 6px;" />*@
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <label ID="Lbl_26" Width="15px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_26
+                                        </label>
+                                    </td>
+                                    <td style="width:300px">
+                                        <div class="panel panel-default" style="direction:rtl; text-align:center; font-family:nazanin; font-size:medium;">
+                                            <div class="panel-body">
+                                                <div id="customerproduct-grid" style="overflow-y:scroll;"></div>
+
+                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#customerproduct-grid").kendoGrid({
+                                                            dataSource: {
+                                                                type: "json",
+                                                                transport: {
+                                                                    read: {
+                                                                        url: "@Html.Raw(Url.Action("CustomerProductList", "Customer"))",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: additionalData
+                                                                    }
+                                                                },
+                                                                schema: {
+                                                                    data: "Data",
+                                                                    total: "Total",
+                                                                    errors: "Errors"
+                                                                },
+                                                                error: function (e) {
+                                                                    display_kendoui_grid_error(e);
+                                                                    // Cancel the changes
+                                                                    this.cancelChanges();
+                                                                },
+                                                                pageSize: @(defaultGridPageSize),
+                                                                serverPaging: true,
+                                                                serverFiltering: true,
+                                                                serverSorting: true
+                                                            },
+                                                            pageable: {
+                                                                refresh: true,
+                                                                pageSizes: [@(gridPageSizes)],
+                                                                @Html.Partial("_GridPagerMessages")
+                                                            },
+                                                            height: 400,
+                                                            scrollable: false,
+                                                            selectable: true,
+                                                            pageable: false,
+                                                            dataBound: onDataBound,
+                                                            columns: [
+                                                                {
+                                                                    field: "Products_ID",
+                                                                    hidden: true
+                                                                },
+                                                                {
+                                                                    field: "ProductsName",
+                                                                    title: "محصولات مشتری",
+                                                                    width: 200
+                                                                }
+                                                            ],
+                                                            change:
+                                                            function () {
+                                                                var selectedRows = this.select();
+                                                                var rowData = this.dataItem(selectedRows[0]);
+                                                                $('#Products_ID').val(rowData.Products_ID);
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                <script type="text/javascript">
+                            var selectedIds = [];
+
+                            $(document).ready(function() {
+                                //search button
+
+
+                                @*$('#User_ID').change(function () {
+                                    var data1 = $('form').serialize();
+                                            $.ajax({
+                                                url: '@Url.Action("GetUserGroups","UserGroup")',
+                                                type: 'POST',
+                                                data: data1,
+                                                success: function (data) {
+                                                    //alert(data);
+                                                }
+                                            }).done(function () {
+                                                $('#userGroups-grid').data('kendoGrid').dataSource.read();
+                                                $('#userGroups-grid').data('kendoGrid').refresh();
+                                            });
+                                });*@
+
+
+                                @*$("#@Html.FieldIdFor(model => model.Message)").keydown(function(event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-log").click();
+                                        return false;
+                                    }
+                                });*@
+
+                                //"delete selected" button
+                                $('#Btn_add').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                                    };
+                                    var data1 = $('form').serialize();
+                                    addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("AddProductToCustomer", "Customer"))",
+                                        data: data1,
+                                        complete: function(data) {
+                                            $('#customerproduct-grid').data('kendoGrid').dataSource.read();
+                                            $('#customerproduct-grid').data('kendoGrid').refresh();
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                });
+
+                                $('#Btn_delete').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                    };
+                                    var data1 = $('form').serialize();
+                                    addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("RemoveProductFromCustomer", "Customer"))",
+                                        data: data1,
+                                        complete: function(data) {
+                                            $('#customerproduct-grid').data('kendoGrid').dataSource.read();
+                                                    $('#customerproduct-grid').data('kendoGrid').refresh();
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                                    });
+
+                                $('#Btn_deleteAll').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                    };
+                                    var data1 = $('form').serialize();
+                                    //addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("RemoveAllProductsFromCustomer", "Customer"))",
+                                        data: data1,
+                                        complete: function(data) {
+                                            $('#customerproduct-grid').data('kendoGrid').dataSource.read();
+                                                    $('#customerproduct-grid').data('kendoGrid').refresh();
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                                    });
+
+                                $('#Btn_addAll').click(function(e) {
+                                    e.preventDefault();
+
+                                    var data1 = $('form').serialize();
+                                    //addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("AddAllProductsToCustomer", "Customer"))",
+                                        data: data1,
+                                        complete: function(data) {
+                                            $('#customerproduct-grid').data('kendoGrid').dataSource.read();
+                                                    $('#customerproduct-grid').data('kendoGrid').refresh();
+                                            //var grid = $('#usergroups-grid').data('kendoGrid');
+                                            //grid.dataSource.page(1); //new search. Set page size to 1
+
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                                    });
+
+                                $('#mastercheckbox').click(function() {
+                                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                                });
+
+                                //wire up checkboxes.
+                                $('#log-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function(e) {
+                                    var $check = $(this);
+                                    if ($check.is(":checked") == true) {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked == -1) {
+                                            //add id to selectedIds.
+                                            selectedIds.push($check.val());
+                                        }
+                                    } else {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked > -1) {
+                                            //remove id from selectedIds.
+                                            selectedIds = $.grep(selectedIds, function(item, index) {
+                                                return item != $check.val();
+                                            });
+                                        }
+                                    }
+                                    updateMasterCheckbox();
+                                });
+                            });
+
+                            function additionalData() {
+                                var data = {
+                                    Products_ID: $('#@Html.FieldIdFor(model => model.Products_ID)').val(),
+                                    Customer_ID: $('#@Html.FieldIdFor(model => model.Customer_ID)').val(),
+                                    CustomerName: $('#@Html.FieldIdFor(model => model.CustomerName)').val()
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+
+                            function onDataBound(e) {
+                                $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function() {
+                                    var currentId = $(this).val();
+                                    var checked = jQuery.inArray(currentId, selectedIds);
+                                    //set checked based on if current checkbox's value is in selectedIds.
+                                    $(this).attr('checked', checked > -1);
+                                });
+
+                                updateMasterCheckbox();
+                            }
+
+                            function updateMasterCheckbox() {
+                                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                                var numChkBoxesChecked = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                            }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label ID="Lbl_25" Width="40px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_25
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:60%; height:60%">
+                                        <label ID="Lbl_22" Width="85px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_22
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:60%; height:60%">
+                                        <label ID="Lbl_23" Width="85px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_23
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:330px; height:40px">
+                                        <label ID="Lbl_18" Width="330px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_18
+                                        </label>
+                                    </td>
+                                    <td style="width:150px; height:40px">
+                                        <button id="Btn_Submit" class="btn btn-primary btn-search" tabindex=2>
+                                            <i class="fa fa-save">
+                                            </i>
+                                            <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                ثبت
+                                            </span>
+                                        </button>
+                                    </td>
+                                    <td style="width:300px; height:40px">
+                                        <label ID="Lbl_21" Width="300px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_18" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_18
+                                        </label>
+                                    </td>
+                                    <td style="width:34%; text-align:center;">
+                                        <label id="Message" style="color:red; text-align: center; font-family:nazanin; font-size:small;width:100%;"></label>
+                                    </td>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_21" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_18" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_18
+                                        </label>
+                                    </td>
+                                    <td style="width:34%;">
+                                        <label ID="Lbl_21" Width="34%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_21" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                </td>
+                <td style="width:20%; height:20%"></td>
+            </tr>
+            <tr style="width: 100%; height:20%">
+                <td style="width:20%; height:20%"></td>
+                <td style="width:60%; height:60%"></td>
+                <td style="width:20%; height:20%"></td>
+            </tr>
+        </table>
+    </div>
+}

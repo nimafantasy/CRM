@@ -1,0 +1,347 @@
+﻿@using Services;
+@using Data;
+
+@{
+    UserService _userService = new UserService();
+    //var user = _userService.GetUserById(Convert.ToInt32(@Session["UserID"]));
+    List<Tbl_Group> grps = _userService.GetUserGroups(Convert.ToInt32(@Session["UserID"]));
+    //class="treeview active current-active-item"
+}
+
+
+
+<ul class="sidebar-menu" style="cursor:pointer;">
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 1 && y.SubAct_ID <= 4)))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+                <i class="fa fa-user" style="float:right;"></i>
+                <span id="100" class="menu-item-title" style="">مدیریت کاربران</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(1))))
+                {
+                    <li>
+                        <a href="~/User/User" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="101" class="menu-item-title">ثبت کاربر</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 2 && y.SubAct_ID <= 4)))
+                {
+                    <li class="treeview">
+
+                        <a href="#" class="menu-item-link" style="text-align:right;">
+                            <span id="110" class="menu-item-title">تعیین سطح دسترسی</span>
+                            <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(2))))
+                            {
+                                <li>
+                                    <a href="~/Group/Group" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="111" class="menu-item-title">ثبت گروه کاربری</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(3))))
+                            {
+                                <li>
+                                    <a href="~/GroupActivity/Group_Activity" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="112" class="menu-item-title">تعیین دسترسی فعالیت‌های گروه</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(4))))
+                            {
+                                <li>
+                                    <a href="~/UserGroup/User_Group" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="113" class="menu-item-title">ثبت کاربر در گروه کاربری</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+
+        </li>
+    }
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 5 && y.SubAct_ID <= 15)))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+                <i class="fa fa-suitcase" style="float:right;"></i>
+                <span id="200" class="menu-item-title">امور مشتریان</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(5))))
+                {
+                    <li>
+                        <a href="~/Customer/Customer" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="201" class="menu-item-title">ثبت مشتری</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(6))))
+                {
+                    <li>
+                        <a href="~/Support/Installation" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="202" class="menu-item-title">ثبت نصب و راه‌اندازی</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(7))))
+                {
+                    <li>
+                        <a href="~/Customer/Training" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="203" class="menu-item-title">ثبت دوره آموزش</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 8 && y.SubAct_ID <= 15)))
+                {
+                    <li class="treeview">
+                        <a href="#" class="menu-item-link" style="text-align:right;">
+                            <span id="210" class="menu-item-title">ثبت درخواست مشتری</span>
+                            <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(8))))
+                            {
+                                <li>
+                                    <a href="~/Hardware/Hardware_req" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="211" class="menu-item-title">درخواست خرید سخت‌افزار</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(9))))
+                            {
+                                <li>
+                                    <a href="~/Software/Software_req" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="212" class="menu-item-title">درخواست خرید نرم‌افزار</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(10))))
+                            {
+                                <li>
+                                    <a href="~/Software/ChangeSoftware_Req" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="213" class="menu-item-title">تغییرات جدید در نرم‌افزار</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(11))))
+                            {
+                                <li>
+                                    <a href="~/Support/SupportServices" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="214" class="menu-item-title">خدمات پشتیبانی</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(12))))
+                            {
+                                <li>
+                                    <a href="~/Hardware/DeviceFailure" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="215" class="menu-item-title">اعلام خرابی دستگاه</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(13))))
+                            {
+                                <li>
+                                    <a href="~/Hardware/SendToRepair" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="216" class="menu-item-title">ارسال دستگاه برای تعمیر</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(14))))
+                            {
+                                <li>
+                                    <a href="~/Hardware/ReturnRepairedDevice" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="217" class="menu-item-title">عودت دستگاه تعمیر شده</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(15))))
+                            {
+                                <li>
+                                    <a href="~/Support/Other_Req" class="menu-item-link" style="text-align:right;">
+                                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                                        <span id="218" class="menu-item-title">سایر درخواست‌ها</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 16 && y.SubAct_ID <= 17)))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+                <i class="fa fa-dollar" style="float:right;"></i>
+                <span id="300" class="menu-item-title">امور مالی</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(16))))
+                {
+                    <li>
+                        <a href="~/Accounting/PreInvoice" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="301" class="menu-item-title">صدور پیش‌فاکتور</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(17))))
+                {
+                    <li class="treeview">
+                        <a href="~/Accounting/Payment" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="302" class="menu-item-title">ثبت پرداخت‌ها</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID >= 18 && y.SubAct_ID <=22)))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+                <i class="fa fa-save" style="float:right;"></i>
+                <span id="400" class="menu-item-title">ثبت اطلاعات</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(18))))
+                {
+                    <li>
+                        <a href="~/Hardware/HardwareType" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="401" class="menu-item-title">ثبت انواع سخت‌افزار</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(19))))
+                {
+                    <li>
+                        <a href="~/Software/SoftwareType" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="402" class="menu-item-title">ثبت انواع نرم‌افزار</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(20))))
+                {
+                    <li>
+                        <a href="~/Product/Products" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="403" class="menu-item-title">ثبت انواع محصولات</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(21))))
+                {
+                    <li>
+                        <a href="~/Customer/CustomerField" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="404" class="menu-item-title">ثبت فیلد کاری مشتری</span>
+                        </a>
+                    </li>
+                }
+                @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(22))))
+                {
+                    <li>
+                        <a href="~/Support/RequestType" class="menu-item-link" style="text-align:right;">
+                            <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                            <span id="405" class="menu-item-title">ثبت انواع درخواست‌ها</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(23))))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+                <i class="fa fa-phone" style="float:right;"></i>
+                <span id="500" class="menu-item-title">خدمات پس‌از‌فروش</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="~/Home/UnderConstruction" class="menu-item-link" style="text-align:right;">
+                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                        <span id="501" class="menu-item-title">دریافت دستگاه از مشتری</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+    @if (grps.Any(x => x.Tbl_Group_Activity.Any(y => y.SubAct_ID.Equals(24))))
+    {
+        <li class="treeview">
+            <a htrf="#" style="text-align:right;">
+
+                <i class="fa fa-file" style="float:right;"></i>
+                <span id="600" class="menu-item-title">گزارشات</span>
+                <i class="fa fa-angle-left" style="position:absolute; left:10px;"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="~/Home/UnderConstruction" class="menu-item-link" style="text-align:right;">
+                        <i class="fa fa-dot-circle-o" style="float:right;"></i>
+                        <span id="601" class="menu-item-title">...</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    }
+
+</ul>
+<script>
+    $(document).ready(function () {
+        //this will attach the class to every target 
+        $(document).on('click', function (event) {
+            $target = $(event.target);
+            //$target.addClass('widget-selected');
+            localStorage['menu'] = $target.attr('id');
+            //console.log($target);
+            //console.log(localStorage['menu']);
+        });
+
+        function rre() {
+            $(".sidebar-menu ul").removeClass("active");
+            $(".sidebar-menu ul").removeClass("current-active-item");
+            $(".sidebar-menu li").removeClass("active");
+            $(".sidebar-menu li").removeClass("current-active-item");
+            $(".sidebar-menu a").removeClass("active");
+            $(".sidebar-menu a").removeClass("current-active-item");
+            $("#" + localStorage['menu']).parents().addClass('active current-active-item');
+            //console.log(localStorage['menu']);
+        }
+        rre();
+    })
+</script>

@@ -1,0 +1,3017 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_ChangeSoftware">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RequiredChanges" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RequestDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Customer">
+          <Key>
+            <PropertyRef Name="Customer_ID" />
+          </Key>
+          <Property Name="Customer_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SubscriptionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TelNo" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="FaxNo" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyRegistrationName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EconomicalNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegistrationNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NationalID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerField_ID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Customer_Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="Products_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_CustomerField">
+          <Key>
+            <PropertyRef Name="CustomerField_ID" />
+          </Key>
+          <Property Name="CustomerField_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerField_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_DeviceFailure">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProblemType" Type="int" Nullable="false" />
+          <Property Name="Troubleshooting" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeliveryDeviceSerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_GetDevice">
+          <Key>
+            <PropertyRef Name="GetDevice_ID" />
+          </Key>
+          <Property Name="GetDevice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RepairsInfo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="TestDevice" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReturnDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Group">
+          <Key>
+            <PropertyRef Name="Group_ID" />
+          </Key>
+          <Property Name="Group_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Group_Activity">
+          <Key>
+            <PropertyRef Name="GrpAct_ID" />
+          </Key>
+          <Property Name="GrpAct_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_ID" Type="int" Nullable="false" />
+          <Property Name="SubAct_ID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Hardware">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Hardware_ID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" />
+          <Property Name="DeliveryDeviceSerialNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeliveryDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_HardwareType">
+          <Key>
+            <PropertyRef Name="Hardware_ID" />
+          </Key>
+          <Property Name="Hardware_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HardwareName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Products_ID" Type="int" Nullable="false" />
+          <Property Name="HardwarePrice" Type="int" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Installation">
+          <Key>
+            <PropertyRef Name="Installation_ID" />
+          </Key>
+          <Property Name="Installation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SendSystemRequirements" Type="int" Nullable="false" />
+          <Property Name="InstallationLocation" Type="int" Nullable="false" />
+          <Property Name="InstallationProgram" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate_SOHA" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeliveryDate_Customer" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientsNumber" Type="int" Nullable="false" />
+          <Property Name="PurchasedDevicesNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdministratorPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPServer" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CPU" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RAM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SystemType" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Log">
+          <Key>
+            <PropertyRef Name="Log_ID" />
+          </Key>
+          <Property Name="Log_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="500" />
+          <Property Name="Url" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Tbl_MainActivity">
+          <Key>
+            <PropertyRef Name="MainAct_ID" />
+          </Key>
+          <Property Name="MainAct_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainActName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_OtherRequest">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RequestType_ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Payment">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="PreInvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaymentDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PaymentAmount" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_PreInvoice">
+          <Key>
+            <PropertyRef Name="PreInvoice_ID" />
+          </Key>
+          <Property Name="PreInvoice_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreInvoiceType_ID" Type="int" Nullable="false" />
+          <Property Name="PreInvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IssueDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SendingStatus" Type="int" Nullable="false" />
+          <Property Name="PreInvoiceUpload" Type="image" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ConfirmationStatus" Type="int" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_PreInvoiceType">
+          <Key>
+            <PropertyRef Name="PreInvoiceType_ID" />
+          </Key>
+          <Property Name="PreInvoiceType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreInvoiceType" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Products">
+          <Key>
+            <PropertyRef Name="Products_ID" />
+          </Key>
+          <Property Name="Products_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductsName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_RequestType">
+          <Key>
+            <PropertyRef Name="RequestType_ID" />
+          </Key>
+          <Property Name="RequestType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestTypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_ReturnRepairedDevice">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Repairs" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReturnDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Section">
+          <Key>
+            <PropertyRef Name="Section_ID" />
+          </Key>
+          <Property Name="Section_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Section_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_SendToRepair">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProblemInfo" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PostageDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReturnDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Software">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Software_ID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="10" />
+          <Property Name="DeliveryDescription" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_SoftwareType">
+          <Key>
+            <PropertyRef Name="Software_ID" />
+          </Key>
+          <Property Name="Software_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SoftwareName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Products_ID" Type="int" Nullable="false" />
+          <Property Name="SoftwarePrice" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_SubActivity">
+          <Key>
+            <PropertyRef Name="SubAct_ID" />
+          </Key>
+          <Property Name="SubAct_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MainAct_ID" Type="int" Nullable="false" />
+          <Property Name="SubActName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_SupportServices">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Problem" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Guidance" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="GuidanceDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Training">
+          <Key>
+            <PropertyRef Name="Training_ID" />
+          </Key>
+          <Property Name="Training_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="CustomerConnector" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TrainingDate" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NamesOfPeople" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ScoreOfPeople" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PersonnelID" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Section_ID" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_User_Group">
+          <Key>
+            <PropertyRef Name="GrpUser_ID" />
+          </Key>
+          <Property Name="GrpUser_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_ID" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="int" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tbl_ChangeSoftware_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_ChangeSoftware" Type="Self.Tbl_ChangeSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ChangeSoftware">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ChangeSoftware_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ChangeSoftware" Type="Self.Tbl_ChangeSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ChangeSoftware">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Products_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Customer_Products" Type="Self.Tbl_Customer_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer_Products">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Products_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_Customer_Products" Type="Self.Tbl_Customer_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer_Products">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Tbl_CustomerField">
+          <End Role="Tbl_CustomerField" Type="Self.Tbl_CustomerField" Multiplicity="1" />
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_CustomerField">
+              <PropertyRef Name="CustomerField_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer">
+              <PropertyRef Name="CustomerField_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_DeviceFailure_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_DeviceFailure" Type="Self.Tbl_DeviceFailure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_DeviceFailure">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_DeviceFailure_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_DeviceFailure" Type="Self.Tbl_DeviceFailure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_DeviceFailure">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_GetDevice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_GetDevice" Type="Self.Tbl_GetDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_GetDevice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_GetDevice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_GetDevice" Type="Self.Tbl_GetDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_GetDevice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_Group">
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_SubActivity">
+          <End Role="Tbl_SubActivity" Type="Self.Tbl_SubActivity" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SubActivity">
+              <PropertyRef Name="SubAct_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="SubAct_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_HardwareType">
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_HardwareType">
+              <PropertyRef Name="Hardware_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="Hardware_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HardwareType_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HardwareType">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HardwareType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HardwareType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Installation_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Installation" Type="Self.Tbl_Installation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Installation">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Installation_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Installation" Type="Self.Tbl_Installation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Installation">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_RequestType">
+          <End Role="Tbl_RequestType" Type="Self.Tbl_RequestType" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_RequestType">
+              <PropertyRef Name="RequestType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="RequestType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Payment_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Payment" Type="Self.Tbl_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Payment">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Payment_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Payment" Type="Self.Tbl_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Payment">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_PreInvoiceType">
+          <End Role="Tbl_PreInvoiceType" Type="Self.Tbl_PreInvoiceType" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PreInvoiceType">
+              <PropertyRef Name="PreInvoiceType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="PreInvoiceType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Products_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Products">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_RequestType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_RequestType" Type="Self.Tbl_RequestType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_RequestType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ReturnRepairedDevice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_ReturnRepairedDevice" Type="Self.Tbl_ReturnRepairedDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ReturnRepairedDevice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ReturnRepairedDevice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ReturnRepairedDevice" Type="Self.Tbl_ReturnRepairedDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ReturnRepairedDevice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SendToRepair_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_SendToRepair" Type="Self.Tbl_SendToRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SendToRepair">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SendToRepair_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SendToRepair" Type="Self.Tbl_SendToRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SendToRepair">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_SoftwareType">
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SoftwareType">
+              <PropertyRef Name="Software_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="Software_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SoftwareType_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SoftwareType">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SoftwareType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SoftwareType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SubActivity_Tbl_MainActivity">
+          <End Role="Tbl_MainActivity" Type="Self.Tbl_MainActivity" Multiplicity="1" />
+          <End Role="Tbl_SubActivity" Type="Self.Tbl_SubActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_MainActivity">
+              <PropertyRef Name="MainAct_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SubActivity">
+              <PropertyRef Name="MainAct_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SupportServices_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_SupportServices" Type="Self.Tbl_SupportServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SupportServices">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SupportServices_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SupportServices" Type="Self.Tbl_SupportServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SupportServices">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Training_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Training" Type="Self.Tbl_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Training">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Training_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Training" Type="Self.Tbl_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Training">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_Group">
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_User1">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_Section">
+          <End Role="Tbl_Section" Type="Self.Tbl_Section" Multiplicity="1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Section">
+              <PropertyRef Name="Section_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMModelStoreContainer">
+          <EntitySet Name="Tbl_ChangeSoftware" EntityType="Self.Tbl_ChangeSoftware" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Customer" EntityType="Self.Tbl_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Customer_Products" EntityType="Self.Tbl_Customer_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_CustomerField" EntityType="Self.Tbl_CustomerField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_DeviceFailure" EntityType="Self.Tbl_DeviceFailure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_GetDevice" EntityType="Self.Tbl_GetDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Group" EntityType="Self.Tbl_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Group_Activity" EntityType="Self.Tbl_Group_Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Hardware" EntityType="Self.Tbl_Hardware" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_HardwareType" EntityType="Self.Tbl_HardwareType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Installation" EntityType="Self.Tbl_Installation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Log" EntityType="Self.Tbl_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_MainActivity" EntityType="Self.Tbl_MainActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_OtherRequest" EntityType="Self.Tbl_OtherRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Payment" EntityType="Self.Tbl_Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PreInvoice" EntityType="Self.Tbl_PreInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_PreInvoiceType" EntityType="Self.Tbl_PreInvoiceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Products" EntityType="Self.Tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_RequestType" EntityType="Self.Tbl_RequestType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ReturnRepairedDevice" EntityType="Self.Tbl_ReturnRepairedDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Section" EntityType="Self.Tbl_Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_SendToRepair" EntityType="Self.Tbl_SendToRepair" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Software" EntityType="Self.Tbl_Software" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_SoftwareType" EntityType="Self.Tbl_SoftwareType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_SubActivity" EntityType="Self.Tbl_SubActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_SupportServices" EntityType="Self.Tbl_SupportServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Training" EntityType="Self.Tbl_Training" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_User_Group" EntityType="Self.Tbl_User_Group" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_ChangeSoftware_Tbl_Customer" Association="Self.FK_Tbl_ChangeSoftware_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_ChangeSoftware" EntitySet="Tbl_ChangeSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ChangeSoftware_Tbl_User" Association="Self.FK_Tbl_ChangeSoftware_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ChangeSoftware" EntitySet="Tbl_ChangeSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Products_Tbl_Customer" Association="Self.FK_Tbl_Customer_Products_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Customer_Products" EntitySet="Tbl_Customer_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Products_Tbl_Products" Association="Self.FK_Tbl_Customer_Products_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_Customer_Products" EntitySet="Tbl_Customer_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Tbl_CustomerField" Association="Self.FK_Tbl_Customer_Tbl_CustomerField">
+            <End Role="Tbl_CustomerField" EntitySet="Tbl_CustomerField" />
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Tbl_User" Association="Self.FK_Tbl_Customer_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_DeviceFailure_Tbl_Customer" Association="Self.FK_Tbl_DeviceFailure_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_DeviceFailure" EntitySet="Tbl_DeviceFailure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_DeviceFailure_Tbl_User" Association="Self.FK_Tbl_DeviceFailure_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_DeviceFailure" EntitySet="Tbl_DeviceFailure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_GetDevice_Tbl_Customer" Association="Self.FK_Tbl_GetDevice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_GetDevice" EntitySet="Tbl_GetDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_GetDevice_Tbl_User" Association="Self.FK_Tbl_GetDevice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_GetDevice" EntitySet="Tbl_GetDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_Group" Association="Self.FK_Tbl_Group_Activity_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_SubActivity" Association="Self.FK_Tbl_Group_Activity_Tbl_SubActivity">
+            <End Role="Tbl_SubActivity" EntitySet="Tbl_SubActivity" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_User" Association="Self.FK_Tbl_Group_Activity_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Tbl_User" Association="Self.FK_Tbl_Group_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_Customer" Association="Self.FK_Tbl_Hardware_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_HardwareType" Association="Self.FK_Tbl_Hardware_Tbl_HardwareType">
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_User" Association="Self.FK_Tbl_Hardware_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HardwareType_Tbl_Products" Association="Self.FK_Tbl_HardwareType_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HardwareType_Tbl_User" Association="Self.FK_Tbl_HardwareType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Installation_Tbl_Customer" Association="Self.FK_Tbl_Installation_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Installation" EntitySet="Tbl_Installation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Installation_Tbl_User" Association="Self.FK_Tbl_Installation_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Installation" EntitySet="Tbl_Installation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_Customer" Association="Self.FK_Tbl_OtherRequest_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_RequestType" Association="Self.FK_Tbl_OtherRequest_Tbl_RequestType">
+            <End Role="Tbl_RequestType" EntitySet="Tbl_RequestType" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_User" Association="Self.FK_Tbl_OtherRequest_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Payment_Tbl_Customer" Association="Self.FK_Tbl_Payment_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Payment" EntitySet="Tbl_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Payment_Tbl_User" Association="Self.FK_Tbl_Payment_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Payment" EntitySet="Tbl_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_Customer" Association="Self.FK_Tbl_PreInvoice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_PreInvoiceType" Association="Self.FK_Tbl_PreInvoice_Tbl_PreInvoiceType">
+            <End Role="Tbl_PreInvoiceType" EntitySet="Tbl_PreInvoiceType" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_User" Association="Self.FK_Tbl_PreInvoice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Products_Tbl_User" Association="Self.FK_Tbl_Products_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_RequestType_Tbl_User" Association="Self.FK_Tbl_RequestType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_RequestType" EntitySet="Tbl_RequestType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ReturnRepairedDevice_Tbl_Customer" Association="Self.FK_Tbl_ReturnRepairedDevice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_ReturnRepairedDevice" EntitySet="Tbl_ReturnRepairedDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ReturnRepairedDevice_Tbl_User" Association="Self.FK_Tbl_ReturnRepairedDevice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ReturnRepairedDevice" EntitySet="Tbl_ReturnRepairedDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SendToRepair_Tbl_Customer" Association="Self.FK_Tbl_SendToRepair_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_SendToRepair" EntitySet="Tbl_SendToRepair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SendToRepair_Tbl_User" Association="Self.FK_Tbl_SendToRepair_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SendToRepair" EntitySet="Tbl_SendToRepair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_Customer" Association="Self.FK_Tbl_Software_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_SoftwareType" Association="Self.FK_Tbl_Software_Tbl_SoftwareType">
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_User" Association="Self.FK_Tbl_Software_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SoftwareType_Tbl_Products" Association="Self.FK_Tbl_SoftwareType_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SoftwareType_Tbl_User" Association="Self.FK_Tbl_SoftwareType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SubActivity_Tbl_MainActivity" Association="Self.FK_Tbl_SubActivity_Tbl_MainActivity">
+            <End Role="Tbl_MainActivity" EntitySet="Tbl_MainActivity" />
+            <End Role="Tbl_SubActivity" EntitySet="Tbl_SubActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SupportServices_Tbl_Customer" Association="Self.FK_Tbl_SupportServices_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_SupportServices" EntitySet="Tbl_SupportServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SupportServices_Tbl_User" Association="Self.FK_Tbl_SupportServices_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SupportServices" EntitySet="Tbl_SupportServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Training_Tbl_Customer" Association="Self.FK_Tbl_Training_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Training" EntitySet="Tbl_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Training_Tbl_User" Association="Self.FK_Tbl_Training_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Training" EntitySet="Tbl_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_Group" Association="Self.FK_Tbl_User_Group_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_User" Association="Self.FK_Tbl_User_Group_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_User1" Association="Self.FK_Tbl_User_Group_Tbl_User1">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_Section" Association="Self.FK_Tbl_User_Tbl_Section">
+            <End Role="Tbl_Section" EntitySet="Tbl_Section" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_ChangeSoftware">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequiredChanges" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_ChangeSoftware_Tbl_Customer" FromRole="Tbl_ChangeSoftware" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_ChangeSoftware_Tbl_User" FromRole="Tbl_ChangeSoftware" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Customer">
+          <Key>
+            <PropertyRef Name="Customer_ID" />
+          </Key>
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SubscriptionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TelNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FaxNo" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyRegistrationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EconomicalNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NationalID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustomerField_ID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_ChangeSoftware" Relationship="Self.FK_Tbl_ChangeSoftware_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_ChangeSoftware" />
+          <NavigationProperty Name="Tbl_Customer_Products" Relationship="Self.FK_Tbl_Customer_Products_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Customer_Products" />
+          <NavigationProperty Name="Tbl_CustomerField" Relationship="Self.FK_Tbl_Customer_Tbl_CustomerField" FromRole="Tbl_Customer" ToRole="Tbl_CustomerField" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Customer_Tbl_User" FromRole="Tbl_Customer" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_DeviceFailure" Relationship="Self.FK_Tbl_DeviceFailure_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_DeviceFailure" />
+          <NavigationProperty Name="Tbl_GetDevice" Relationship="Self.FK_Tbl_GetDevice_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_GetDevice" />
+          <NavigationProperty Name="Tbl_Hardware" Relationship="Self.FK_Tbl_Hardware_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Hardware" />
+          <NavigationProperty Name="Tbl_Installation" Relationship="Self.FK_Tbl_Installation_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Installation" />
+          <NavigationProperty Name="Tbl_OtherRequest" Relationship="Self.FK_Tbl_OtherRequest_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_OtherRequest" />
+          <NavigationProperty Name="Tbl_Payment" Relationship="Self.FK_Tbl_Payment_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Payment" />
+          <NavigationProperty Name="Tbl_PreInvoice" Relationship="Self.FK_Tbl_PreInvoice_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_PreInvoice" />
+          <NavigationProperty Name="Tbl_ReturnRepairedDevice" Relationship="Self.FK_Tbl_ReturnRepairedDevice_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_ReturnRepairedDevice" />
+          <NavigationProperty Name="Tbl_SendToRepair" Relationship="Self.FK_Tbl_SendToRepair_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_SendToRepair" />
+          <NavigationProperty Name="Tbl_Software" Relationship="Self.FK_Tbl_Software_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Software" />
+          <NavigationProperty Name="Tbl_SupportServices" Relationship="Self.FK_Tbl_SupportServices_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_SupportServices" />
+          <NavigationProperty Name="Tbl_Training" Relationship="Self.FK_Tbl_Training_Tbl_Customer" FromRole="Tbl_Customer" ToRole="Tbl_Training" />
+        </EntityType>
+        <EntityType Name="Tbl_Customer_Products">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Products_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Customer_Products_Tbl_Customer" FromRole="Tbl_Customer_Products" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_Products" Relationship="Self.FK_Tbl_Customer_Products_Tbl_Products" FromRole="Tbl_Customer_Products" ToRole="Tbl_Products" />
+        </EntityType>
+        <EntityType Name="Tbl_CustomerField">
+          <Key>
+            <PropertyRef Name="CustomerField_ID" />
+          </Key>
+          <Property Name="CustomerField_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerField_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Customer_Tbl_CustomerField" FromRole="Tbl_CustomerField" ToRole="Tbl_Customer" />
+        </EntityType>
+        <EntityType Name="Tbl_DeviceFailure">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProblemType" Type="Int32" Nullable="false" />
+          <Property Name="Troubleshooting" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDeviceSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_DeviceFailure_Tbl_Customer" FromRole="Tbl_DeviceFailure" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_DeviceFailure_Tbl_User" FromRole="Tbl_DeviceFailure" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_GetDevice">
+          <Key>
+            <PropertyRef Name="GetDevice_ID" />
+          </Key>
+          <Property Name="GetDevice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RepairsInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestDevice" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReturnDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_GetDevice_Tbl_Customer" FromRole="Tbl_GetDevice" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_GetDevice_Tbl_User" FromRole="Tbl_GetDevice" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Group">
+          <Key>
+            <PropertyRef Name="Group_ID" />
+          </Key>
+          <Property Name="Group_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Group_Activity" Relationship="Self.FK_Tbl_Group_Activity_Tbl_Group" FromRole="Tbl_Group" ToRole="Tbl_Group_Activity" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Group_Tbl_User" FromRole="Tbl_Group" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_User_Group" Relationship="Self.FK_Tbl_User_Group_Tbl_Group" FromRole="Tbl_Group" ToRole="Tbl_User_Group" />
+        </EntityType>
+        <EntityType Name="Tbl_Group_Activity">
+          <Key>
+            <PropertyRef Name="GrpAct_ID" />
+          </Key>
+          <Property Name="GrpAct_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubAct_ID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Group" Relationship="Self.FK_Tbl_Group_Activity_Tbl_Group" FromRole="Tbl_Group_Activity" ToRole="Tbl_Group" />
+          <NavigationProperty Name="Tbl_SubActivity" Relationship="Self.FK_Tbl_Group_Activity_Tbl_SubActivity" FromRole="Tbl_Group_Activity" ToRole="Tbl_SubActivity" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Group_Activity_Tbl_User" FromRole="Tbl_Group_Activity" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Hardware">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hardware_ID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryDeviceSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Hardware_Tbl_Customer" FromRole="Tbl_Hardware" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_HardwareType" Relationship="Self.FK_Tbl_Hardware_Tbl_HardwareType" FromRole="Tbl_Hardware" ToRole="Tbl_HardwareType" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Hardware_Tbl_User" FromRole="Tbl_Hardware" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_HardwareType">
+          <Key>
+            <PropertyRef Name="Hardware_ID" />
+          </Key>
+          <Property Name="Hardware_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HardwareName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Products_ID" Type="Int32" Nullable="false" />
+          <Property Name="HardwarePrice" Type="Int32" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Hardware" Relationship="Self.FK_Tbl_Hardware_Tbl_HardwareType" FromRole="Tbl_HardwareType" ToRole="Tbl_Hardware" />
+          <NavigationProperty Name="Tbl_Products" Relationship="Self.FK_Tbl_HardwareType_Tbl_Products" FromRole="Tbl_HardwareType" ToRole="Tbl_Products" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_HardwareType_Tbl_User" FromRole="Tbl_HardwareType" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Installation">
+          <Key>
+            <PropertyRef Name="Installation_ID" />
+          </Key>
+          <Property Name="Installation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SendSystemRequirements" Type="Int32" Nullable="false" />
+          <Property Name="InstallationLocation" Type="Int32" Nullable="false" />
+          <Property Name="InstallationProgram" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryDate_SOHA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate_Customer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientsNumber" Type="Int32" Nullable="false" />
+          <Property Name="PurchasedDevicesNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdministratorPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IPServer" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CPU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RAM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SystemType" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Installation_Tbl_Customer" FromRole="Tbl_Installation" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Installation_Tbl_User" FromRole="Tbl_Installation" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Log">
+          <Key>
+            <PropertyRef Name="Log_ID" />
+          </Key>
+          <Property Name="Log_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detail" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tbl_MainActivity">
+          <Key>
+            <PropertyRef Name="MainAct_ID" />
+          </Key>
+          <Property Name="MainAct_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainActName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_SubActivity" Relationship="Self.FK_Tbl_SubActivity_Tbl_MainActivity" FromRole="Tbl_MainActivity" ToRole="Tbl_SubActivity" />
+        </EntityType>
+        <EntityType Name="Tbl_OtherRequest">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestType_ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_OtherRequest_Tbl_Customer" FromRole="Tbl_OtherRequest" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_RequestType" Relationship="Self.FK_Tbl_OtherRequest_Tbl_RequestType" FromRole="Tbl_OtherRequest" ToRole="Tbl_RequestType" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_OtherRequest_Tbl_User" FromRole="Tbl_OtherRequest" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Payment">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="PreInvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentAmount" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Payment_Tbl_Customer" FromRole="Tbl_Payment" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Payment_Tbl_User" FromRole="Tbl_Payment" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_PreInvoice">
+          <Key>
+            <PropertyRef Name="PreInvoice_ID" />
+          </Key>
+          <Property Name="PreInvoice_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreInvoiceType_ID" Type="Int32" Nullable="false" />
+          <Property Name="PreInvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IssueDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SendingStatus" Type="Int32" Nullable="false" />
+          <Property Name="PreInvoiceUpload" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ConfirmationStatus" Type="Int32" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_PreInvoice_Tbl_Customer" FromRole="Tbl_PreInvoice" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_PreInvoiceType" Relationship="Self.FK_Tbl_PreInvoice_Tbl_PreInvoiceType" FromRole="Tbl_PreInvoice" ToRole="Tbl_PreInvoiceType" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_PreInvoice_Tbl_User" FromRole="Tbl_PreInvoice" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_PreInvoiceType">
+          <Key>
+            <PropertyRef Name="PreInvoiceType_ID" />
+          </Key>
+          <Property Name="PreInvoiceType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreInvoiceType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_PreInvoice" Relationship="Self.FK_Tbl_PreInvoice_Tbl_PreInvoiceType" FromRole="Tbl_PreInvoiceType" ToRole="Tbl_PreInvoice" />
+        </EntityType>
+        <EntityType Name="Tbl_Products">
+          <Key>
+            <PropertyRef Name="Products_ID" />
+          </Key>
+          <Property Name="Products_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductsName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer_Products" Relationship="Self.FK_Tbl_Customer_Products_Tbl_Products" FromRole="Tbl_Products" ToRole="Tbl_Customer_Products" />
+          <NavigationProperty Name="Tbl_HardwareType" Relationship="Self.FK_Tbl_HardwareType_Tbl_Products" FromRole="Tbl_Products" ToRole="Tbl_HardwareType" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Products_Tbl_User" FromRole="Tbl_Products" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_SoftwareType" Relationship="Self.FK_Tbl_SoftwareType_Tbl_Products" FromRole="Tbl_Products" ToRole="Tbl_SoftwareType" />
+        </EntityType>
+        <EntityType Name="Tbl_RequestType">
+          <Key>
+            <PropertyRef Name="RequestType_ID" />
+          </Key>
+          <Property Name="RequestType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_OtherRequest" Relationship="Self.FK_Tbl_OtherRequest_Tbl_RequestType" FromRole="Tbl_RequestType" ToRole="Tbl_OtherRequest" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_RequestType_Tbl_User" FromRole="Tbl_RequestType" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_ReturnRepairedDevice">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Repairs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReturnDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_ReturnRepairedDevice_Tbl_Customer" FromRole="Tbl_ReturnRepairedDevice" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_ReturnRepairedDevice_Tbl_User" FromRole="Tbl_ReturnRepairedDevice" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Section">
+          <Key>
+            <PropertyRef Name="Section_ID" />
+          </Key>
+          <Property Name="Section_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Section_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_User_Tbl_Section" FromRole="Tbl_Section" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_SendToRepair">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeviceSerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProblemInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostageDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReturnDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_SendToRepair_Tbl_Customer" FromRole="Tbl_SendToRepair" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_SendToRepair_Tbl_User" FromRole="Tbl_SendToRepair" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Software">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Software_ID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DeliveryDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Software_Tbl_Customer" FromRole="Tbl_Software" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_SoftwareType" Relationship="Self.FK_Tbl_Software_Tbl_SoftwareType" FromRole="Tbl_Software" ToRole="Tbl_SoftwareType" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Software_Tbl_User" FromRole="Tbl_Software" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_SoftwareType">
+          <Key>
+            <PropertyRef Name="Software_ID" />
+          </Key>
+          <Property Name="Software_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SoftwareName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Products_ID" Type="Int32" Nullable="false" />
+          <Property Name="SoftwarePrice" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Products" Relationship="Self.FK_Tbl_SoftwareType_Tbl_Products" FromRole="Tbl_SoftwareType" ToRole="Tbl_Products" />
+          <NavigationProperty Name="Tbl_Software" Relationship="Self.FK_Tbl_Software_Tbl_SoftwareType" FromRole="Tbl_SoftwareType" ToRole="Tbl_Software" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_SoftwareType_Tbl_User" FromRole="Tbl_SoftwareType" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_SubActivity">
+          <Key>
+            <PropertyRef Name="SubAct_ID" />
+          </Key>
+          <Property Name="SubAct_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MainAct_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubActName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Group_Activity" Relationship="Self.FK_Tbl_Group_Activity_Tbl_SubActivity" FromRole="Tbl_SubActivity" ToRole="Tbl_Group_Activity" />
+          <NavigationProperty Name="Tbl_MainActivity" Relationship="Self.FK_Tbl_SubActivity_Tbl_MainActivity" FromRole="Tbl_SubActivity" ToRole="Tbl_MainActivity" />
+        </EntityType>
+        <EntityType Name="Tbl_SupportServices">
+          <Key>
+            <PropertyRef Name="Request_ID" />
+          </Key>
+          <Property Name="Request_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Problem" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Guidance" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GuidanceDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_SupportServices_Tbl_Customer" FromRole="Tbl_SupportServices" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_SupportServices_Tbl_User" FromRole="Tbl_SupportServices" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_Training">
+          <Key>
+            <PropertyRef Name="Training_ID" />
+          </Key>
+          <Property Name="Training_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerConnector" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TrainingDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NamesOfPeople" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ScoreOfPeople" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Training_Tbl_Customer" FromRole="Tbl_Training" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_Training_Tbl_User" FromRole="Tbl_Training" ToRole="Tbl_User" />
+        </EntityType>
+        <EntityType Name="Tbl_User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonnelID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Section_ID" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_ChangeSoftware" Relationship="Self.FK_Tbl_ChangeSoftware_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_ChangeSoftware" />
+          <NavigationProperty Name="Tbl_Customer" Relationship="Self.FK_Tbl_Customer_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Customer" />
+          <NavigationProperty Name="Tbl_DeviceFailure" Relationship="Self.FK_Tbl_DeviceFailure_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_DeviceFailure" />
+          <NavigationProperty Name="Tbl_GetDevice" Relationship="Self.FK_Tbl_GetDevice_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_GetDevice" />
+          <NavigationProperty Name="Tbl_Group" Relationship="Self.FK_Tbl_Group_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Group" />
+          <NavigationProperty Name="Tbl_Group_Activity" Relationship="Self.FK_Tbl_Group_Activity_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Group_Activity" />
+          <NavigationProperty Name="Tbl_Hardware" Relationship="Self.FK_Tbl_Hardware_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Hardware" />
+          <NavigationProperty Name="Tbl_HardwareType" Relationship="Self.FK_Tbl_HardwareType_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_HardwareType" />
+          <NavigationProperty Name="Tbl_Installation" Relationship="Self.FK_Tbl_Installation_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Installation" />
+          <NavigationProperty Name="Tbl_OtherRequest" Relationship="Self.FK_Tbl_OtherRequest_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_OtherRequest" />
+          <NavigationProperty Name="Tbl_Payment" Relationship="Self.FK_Tbl_Payment_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Payment" />
+          <NavigationProperty Name="Tbl_PreInvoice" Relationship="Self.FK_Tbl_PreInvoice_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_PreInvoice" />
+          <NavigationProperty Name="Tbl_Products" Relationship="Self.FK_Tbl_Products_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Products" />
+          <NavigationProperty Name="Tbl_RequestType" Relationship="Self.FK_Tbl_RequestType_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_RequestType" />
+          <NavigationProperty Name="Tbl_ReturnRepairedDevice" Relationship="Self.FK_Tbl_ReturnRepairedDevice_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_ReturnRepairedDevice" />
+          <NavigationProperty Name="Tbl_Section" Relationship="Self.FK_Tbl_User_Tbl_Section" FromRole="Tbl_User" ToRole="Tbl_Section" />
+          <NavigationProperty Name="Tbl_SendToRepair" Relationship="Self.FK_Tbl_SendToRepair_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_SendToRepair" />
+          <NavigationProperty Name="Tbl_Software" Relationship="Self.FK_Tbl_Software_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Software" />
+          <NavigationProperty Name="Tbl_SoftwareType" Relationship="Self.FK_Tbl_SoftwareType_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_SoftwareType" />
+          <NavigationProperty Name="Tbl_SupportServices" Relationship="Self.FK_Tbl_SupportServices_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_SupportServices" />
+          <NavigationProperty Name="Tbl_Training" Relationship="Self.FK_Tbl_Training_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_Training" />
+          <NavigationProperty Name="Tbl_User_Group" Relationship="Self.FK_Tbl_User_Group_Tbl_User" FromRole="Tbl_User" ToRole="Tbl_User_Group" />
+          <NavigationProperty Name="Tbl_User_Group1" Relationship="Self.FK_Tbl_User_Group_Tbl_User1" FromRole="Tbl_User" ToRole="Tbl_User_Group" />
+        </EntityType>
+        <EntityType Name="Tbl_User_Group">
+          <Key>
+            <PropertyRef Name="GrpUser_ID" />
+          </Key>
+          <Property Name="GrpUser_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateUser_ID" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdateDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastUpdateTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Group" Relationship="Self.FK_Tbl_User_Group_Tbl_Group" FromRole="Tbl_User_Group" ToRole="Tbl_Group" />
+          <NavigationProperty Name="Tbl_User" Relationship="Self.FK_Tbl_User_Group_Tbl_User" FromRole="Tbl_User_Group" ToRole="Tbl_User" />
+          <NavigationProperty Name="Tbl_User1" Relationship="Self.FK_Tbl_User_Group_Tbl_User1" FromRole="Tbl_User_Group" ToRole="Tbl_User" />
+        </EntityType>
+        <Association Name="FK_Tbl_ChangeSoftware_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_ChangeSoftware" Type="Self.Tbl_ChangeSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ChangeSoftware">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ChangeSoftware_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ChangeSoftware" Type="Self.Tbl_ChangeSoftware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ChangeSoftware">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Products_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Customer_Products" Type="Self.Tbl_Customer_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer_Products">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Tbl_CustomerField">
+          <End Role="Tbl_CustomerField" Type="Self.Tbl_CustomerField" Multiplicity="1" />
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_CustomerField">
+              <PropertyRef Name="CustomerField_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer">
+              <PropertyRef Name="CustomerField_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_DeviceFailure_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_DeviceFailure" Type="Self.Tbl_DeviceFailure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_DeviceFailure">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_GetDevice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_GetDevice" Type="Self.Tbl_GetDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_GetDevice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Installation_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Installation" Type="Self.Tbl_Installation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Installation">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Payment_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Payment" Type="Self.Tbl_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Payment">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ReturnRepairedDevice_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_ReturnRepairedDevice" Type="Self.Tbl_ReturnRepairedDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ReturnRepairedDevice">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SendToRepair_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_SendToRepair" Type="Self.Tbl_SendToRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SendToRepair">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SupportServices_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_SupportServices" Type="Self.Tbl_SupportServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SupportServices">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Training_Tbl_Customer">
+          <End Role="Tbl_Customer" Type="Self.Tbl_Customer" Multiplicity="1" />
+          <End Role="Tbl_Training" Type="Self.Tbl_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Customer">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Training">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Customer_Products_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_Customer_Products" Type="Self.Tbl_Customer_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Customer_Products">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_DeviceFailure_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_DeviceFailure" Type="Self.Tbl_DeviceFailure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_DeviceFailure">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_GetDevice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_GetDevice" Type="Self.Tbl_GetDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_GetDevice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_Group">
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_Group">
+          <End Role="Tbl_Group" Type="Self.Tbl_Group" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Group">
+              <PropertyRef Name="Group_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="Group_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_SubActivity">
+          <End Role="Tbl_SubActivity" Type="Self.Tbl_SubActivity" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SubActivity">
+              <PropertyRef Name="SubAct_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="SubAct_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Group_Activity_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Group_Activity" Type="Self.Tbl_Group_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Group_Activity">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_HardwareType">
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_HardwareType">
+              <PropertyRef Name="Hardware_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="Hardware_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Hardware_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Hardware" Type="Self.Tbl_Hardware" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Hardware">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HardwareType_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HardwareType">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_HardwareType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_HardwareType" Type="Self.Tbl_HardwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_HardwareType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Installation_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Installation" Type="Self.Tbl_Installation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Installation">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SubActivity_Tbl_MainActivity">
+          <End Role="Tbl_MainActivity" Type="Self.Tbl_MainActivity" Multiplicity="1" />
+          <End Role="Tbl_SubActivity" Type="Self.Tbl_SubActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_MainActivity">
+              <PropertyRef Name="MainAct_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SubActivity">
+              <PropertyRef Name="MainAct_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_RequestType">
+          <End Role="Tbl_RequestType" Type="Self.Tbl_RequestType" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_RequestType">
+              <PropertyRef Name="RequestType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="RequestType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_OtherRequest_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_OtherRequest" Type="Self.Tbl_OtherRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_OtherRequest">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Payment_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Payment" Type="Self.Tbl_Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Payment">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_PreInvoiceType">
+          <End Role="Tbl_PreInvoiceType" Type="Self.Tbl_PreInvoiceType" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_PreInvoiceType">
+              <PropertyRef Name="PreInvoiceType_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="PreInvoiceType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_PreInvoice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_PreInvoice" Type="Self.Tbl_PreInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_PreInvoice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Products_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Products">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SoftwareType_Tbl_Products">
+          <End Role="Tbl_Products" Type="Self.Tbl_Products" Multiplicity="1" />
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Products">
+              <PropertyRef Name="Products_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SoftwareType">
+              <PropertyRef Name="Products_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_RequestType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_RequestType" Type="Self.Tbl_RequestType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_RequestType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ReturnRepairedDevice_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_ReturnRepairedDevice" Type="Self.Tbl_ReturnRepairedDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_ReturnRepairedDevice">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Tbl_Section">
+          <End Role="Tbl_Section" Type="Self.Tbl_Section" Multiplicity="1" />
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Section">
+              <PropertyRef Name="Section_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SendToRepair_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SendToRepair" Type="Self.Tbl_SendToRepair" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SendToRepair">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_SoftwareType">
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_SoftwareType">
+              <PropertyRef Name="Software_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="Software_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Software_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Software" Type="Self.Tbl_Software" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Software">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SoftwareType_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SoftwareType" Type="Self.Tbl_SoftwareType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SoftwareType">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_SupportServices_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_SupportServices" Type="Self.Tbl_SupportServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_SupportServices">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Training_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_Training" Type="Self.Tbl_Training" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_Training">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_User">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_User_Group_Tbl_User1">
+          <End Role="Tbl_User" Type="Self.Tbl_User" Multiplicity="1" />
+          <End Role="Tbl_User_Group" Type="Self.Tbl_User_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Tbl_User_Group">
+              <PropertyRef Name="LastUpdateUser_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_ChangeSoftware" EntityType="Self.Tbl_ChangeSoftware" />
+          <EntitySet Name="Tbl_Customer" EntityType="Self.Tbl_Customer" />
+          <EntitySet Name="Tbl_Customer_Products" EntityType="Self.Tbl_Customer_Products" />
+          <EntitySet Name="Tbl_CustomerField" EntityType="Self.Tbl_CustomerField" />
+          <EntitySet Name="Tbl_DeviceFailure" EntityType="Self.Tbl_DeviceFailure" />
+          <EntitySet Name="Tbl_GetDevice" EntityType="Self.Tbl_GetDevice" />
+          <EntitySet Name="Tbl_Group" EntityType="Self.Tbl_Group" />
+          <EntitySet Name="Tbl_Group_Activity" EntityType="Self.Tbl_Group_Activity" />
+          <EntitySet Name="Tbl_Hardware" EntityType="Self.Tbl_Hardware" />
+          <EntitySet Name="Tbl_HardwareType" EntityType="Self.Tbl_HardwareType" />
+          <EntitySet Name="Tbl_Installation" EntityType="Self.Tbl_Installation" />
+          <EntitySet Name="Tbl_Log" EntityType="Self.Tbl_Log" />
+          <EntitySet Name="Tbl_MainActivity" EntityType="Self.Tbl_MainActivity" />
+          <EntitySet Name="Tbl_OtherRequest" EntityType="Self.Tbl_OtherRequest" />
+          <EntitySet Name="Tbl_Payment" EntityType="Self.Tbl_Payment" />
+          <EntitySet Name="Tbl_PreInvoice" EntityType="Self.Tbl_PreInvoice" />
+          <EntitySet Name="Tbl_PreInvoiceType" EntityType="Self.Tbl_PreInvoiceType" />
+          <EntitySet Name="Tbl_Products" EntityType="Self.Tbl_Products" />
+          <EntitySet Name="Tbl_RequestType" EntityType="Self.Tbl_RequestType" />
+          <EntitySet Name="Tbl_ReturnRepairedDevice" EntityType="Self.Tbl_ReturnRepairedDevice" />
+          <EntitySet Name="Tbl_Section" EntityType="Self.Tbl_Section" />
+          <EntitySet Name="Tbl_SendToRepair" EntityType="Self.Tbl_SendToRepair" />
+          <EntitySet Name="Tbl_Software" EntityType="Self.Tbl_Software" />
+          <EntitySet Name="Tbl_SoftwareType" EntityType="Self.Tbl_SoftwareType" />
+          <EntitySet Name="Tbl_SubActivity" EntityType="Self.Tbl_SubActivity" />
+          <EntitySet Name="Tbl_SupportServices" EntityType="Self.Tbl_SupportServices" />
+          <EntitySet Name="Tbl_Training" EntityType="Self.Tbl_Training" />
+          <EntitySet Name="Tbl_User" EntityType="Self.Tbl_User" />
+          <EntitySet Name="Tbl_User_Group" EntityType="Self.Tbl_User_Group" />
+          <AssociationSet Name="FK_Tbl_ChangeSoftware_Tbl_Customer" Association="Self.FK_Tbl_ChangeSoftware_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_ChangeSoftware" EntitySet="Tbl_ChangeSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ChangeSoftware_Tbl_User" Association="Self.FK_Tbl_ChangeSoftware_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ChangeSoftware" EntitySet="Tbl_ChangeSoftware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Products_Tbl_Customer" Association="Self.FK_Tbl_Customer_Products_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Customer_Products" EntitySet="Tbl_Customer_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Tbl_CustomerField" Association="Self.FK_Tbl_Customer_Tbl_CustomerField">
+            <End Role="Tbl_CustomerField" EntitySet="Tbl_CustomerField" />
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Tbl_User" Association="Self.FK_Tbl_Customer_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_DeviceFailure_Tbl_Customer" Association="Self.FK_Tbl_DeviceFailure_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_DeviceFailure" EntitySet="Tbl_DeviceFailure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_GetDevice_Tbl_Customer" Association="Self.FK_Tbl_GetDevice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_GetDevice" EntitySet="Tbl_GetDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_Customer" Association="Self.FK_Tbl_Hardware_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Installation_Tbl_Customer" Association="Self.FK_Tbl_Installation_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Installation" EntitySet="Tbl_Installation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_Customer" Association="Self.FK_Tbl_OtherRequest_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Payment_Tbl_Customer" Association="Self.FK_Tbl_Payment_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Payment" EntitySet="Tbl_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_Customer" Association="Self.FK_Tbl_PreInvoice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ReturnRepairedDevice_Tbl_Customer" Association="Self.FK_Tbl_ReturnRepairedDevice_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_ReturnRepairedDevice" EntitySet="Tbl_ReturnRepairedDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SendToRepair_Tbl_Customer" Association="Self.FK_Tbl_SendToRepair_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_SendToRepair" EntitySet="Tbl_SendToRepair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_Customer" Association="Self.FK_Tbl_Software_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SupportServices_Tbl_Customer" Association="Self.FK_Tbl_SupportServices_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_SupportServices" EntitySet="Tbl_SupportServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Training_Tbl_Customer" Association="Self.FK_Tbl_Training_Tbl_Customer">
+            <End Role="Tbl_Customer" EntitySet="Tbl_Customer" />
+            <End Role="Tbl_Training" EntitySet="Tbl_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Customer_Products_Tbl_Products" Association="Self.FK_Tbl_Customer_Products_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_Customer_Products" EntitySet="Tbl_Customer_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_DeviceFailure_Tbl_User" Association="Self.FK_Tbl_DeviceFailure_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_DeviceFailure" EntitySet="Tbl_DeviceFailure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_GetDevice_Tbl_User" Association="Self.FK_Tbl_GetDevice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_GetDevice" EntitySet="Tbl_GetDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_Group" Association="Self.FK_Tbl_Group_Activity_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Tbl_User" Association="Self.FK_Tbl_Group_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_Group" Association="Self.FK_Tbl_User_Group_Tbl_Group">
+            <End Role="Tbl_Group" EntitySet="Tbl_Group" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_SubActivity" Association="Self.FK_Tbl_Group_Activity_Tbl_SubActivity">
+            <End Role="Tbl_SubActivity" EntitySet="Tbl_SubActivity" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Group_Activity_Tbl_User" Association="Self.FK_Tbl_Group_Activity_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Group_Activity" EntitySet="Tbl_Group_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_HardwareType" Association="Self.FK_Tbl_Hardware_Tbl_HardwareType">
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Hardware_Tbl_User" Association="Self.FK_Tbl_Hardware_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Hardware" EntitySet="Tbl_Hardware" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HardwareType_Tbl_Products" Association="Self.FK_Tbl_HardwareType_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_HardwareType_Tbl_User" Association="Self.FK_Tbl_HardwareType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_HardwareType" EntitySet="Tbl_HardwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Installation_Tbl_User" Association="Self.FK_Tbl_Installation_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Installation" EntitySet="Tbl_Installation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SubActivity_Tbl_MainActivity" Association="Self.FK_Tbl_SubActivity_Tbl_MainActivity">
+            <End Role="Tbl_MainActivity" EntitySet="Tbl_MainActivity" />
+            <End Role="Tbl_SubActivity" EntitySet="Tbl_SubActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_RequestType" Association="Self.FK_Tbl_OtherRequest_Tbl_RequestType">
+            <End Role="Tbl_RequestType" EntitySet="Tbl_RequestType" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_OtherRequest_Tbl_User" Association="Self.FK_Tbl_OtherRequest_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_OtherRequest" EntitySet="Tbl_OtherRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Payment_Tbl_User" Association="Self.FK_Tbl_Payment_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Payment" EntitySet="Tbl_Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_PreInvoiceType" Association="Self.FK_Tbl_PreInvoice_Tbl_PreInvoiceType">
+            <End Role="Tbl_PreInvoiceType" EntitySet="Tbl_PreInvoiceType" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_PreInvoice_Tbl_User" Association="Self.FK_Tbl_PreInvoice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_PreInvoice" EntitySet="Tbl_PreInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Products_Tbl_User" Association="Self.FK_Tbl_Products_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SoftwareType_Tbl_Products" Association="Self.FK_Tbl_SoftwareType_Tbl_Products">
+            <End Role="Tbl_Products" EntitySet="Tbl_Products" />
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_RequestType_Tbl_User" Association="Self.FK_Tbl_RequestType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_RequestType" EntitySet="Tbl_RequestType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ReturnRepairedDevice_Tbl_User" Association="Self.FK_Tbl_ReturnRepairedDevice_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_ReturnRepairedDevice" EntitySet="Tbl_ReturnRepairedDevice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Tbl_Section" Association="Self.FK_Tbl_User_Tbl_Section">
+            <End Role="Tbl_Section" EntitySet="Tbl_Section" />
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SendToRepair_Tbl_User" Association="Self.FK_Tbl_SendToRepair_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SendToRepair" EntitySet="Tbl_SendToRepair" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_SoftwareType" Association="Self.FK_Tbl_Software_Tbl_SoftwareType">
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Software_Tbl_User" Association="Self.FK_Tbl_Software_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Software" EntitySet="Tbl_Software" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SoftwareType_Tbl_User" Association="Self.FK_Tbl_SoftwareType_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SoftwareType" EntitySet="Tbl_SoftwareType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_SupportServices_Tbl_User" Association="Self.FK_Tbl_SupportServices_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_SupportServices" EntitySet="Tbl_SupportServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Training_Tbl_User" Association="Self.FK_Tbl_Training_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_Training" EntitySet="Tbl_Training" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_User" Association="Self.FK_Tbl_User_Group_Tbl_User">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_User_Group_Tbl_User1" Association="Self.FK_Tbl_User_Group_Tbl_User1">
+            <End Role="Tbl_User" EntitySet="Tbl_User" />
+            <End Role="Tbl_User_Group" EntitySet="Tbl_User_Group" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CRMModelStoreContainer" CdmEntityContainer="CRMEntities">
+          <EntitySetMapping Name="Tbl_ChangeSoftware">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_ChangeSoftware">
+              <MappingFragment StoreEntitySet="Tbl_ChangeSoftware">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="RequiredChanges" ColumnName="RequiredChanges" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Customer">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Customer">
+              <MappingFragment StoreEntitySet="Tbl_Customer">
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="SubscriptionCode" ColumnName="SubscriptionCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CompanyRegistrationName" ColumnName="CompanyRegistrationName" />
+                <ScalarProperty Name="EconomicalNumber" ColumnName="EconomicalNumber" />
+                <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+                <ScalarProperty Name="NationalID" ColumnName="NationalID" />
+                <ScalarProperty Name="CustomerField_ID" ColumnName="CustomerField_ID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Customer_Products">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Customer_Products">
+              <MappingFragment StoreEntitySet="Tbl_Customer_Products">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Products_ID" ColumnName="Products_ID" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_CustomerField">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_CustomerField">
+              <MappingFragment StoreEntitySet="Tbl_CustomerField">
+                <ScalarProperty Name="CustomerField_ID" ColumnName="CustomerField_ID" />
+                <ScalarProperty Name="CustomerField_Name" ColumnName="CustomerField_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_DeviceFailure">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_DeviceFailure">
+              <MappingFragment StoreEntitySet="Tbl_DeviceFailure">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="ProblemType" ColumnName="ProblemType" />
+                <ScalarProperty Name="Troubleshooting" ColumnName="Troubleshooting" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="DeliveryDeviceSerialNumber" ColumnName="DeliveryDeviceSerialNumber" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_GetDevice">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_GetDevice">
+              <MappingFragment StoreEntitySet="Tbl_GetDevice">
+                <ScalarProperty Name="GetDevice_ID" ColumnName="GetDevice_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="DeviceSerialNumber" ColumnName="DeviceSerialNumber" />
+                <ScalarProperty Name="RepairsInfo" ColumnName="RepairsInfo" />
+                <ScalarProperty Name="TestDevice" ColumnName="TestDevice" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Group">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Group">
+              <MappingFragment StoreEntitySet="Tbl_Group">
+                <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Group_Activity">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Group_Activity">
+              <MappingFragment StoreEntitySet="Tbl_Group_Activity">
+                <ScalarProperty Name="GrpAct_ID" ColumnName="GrpAct_ID" />
+                <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
+                <ScalarProperty Name="SubAct_ID" ColumnName="SubAct_ID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Hardware">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Hardware">
+              <MappingFragment StoreEntitySet="Tbl_Hardware">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="Hardware_ID" ColumnName="Hardware_ID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="DeliveryDeviceSerialNumber" ColumnName="DeliveryDeviceSerialNumber" />
+                <ScalarProperty Name="DeliveryDescription" ColumnName="DeliveryDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_HardwareType">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_HardwareType">
+              <MappingFragment StoreEntitySet="Tbl_HardwareType">
+                <ScalarProperty Name="Hardware_ID" ColumnName="Hardware_ID" />
+                <ScalarProperty Name="HardwareName" ColumnName="HardwareName" />
+                <ScalarProperty Name="Products_ID" ColumnName="Products_ID" />
+                <ScalarProperty Name="HardwarePrice" ColumnName="HardwarePrice" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Installation">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Installation">
+              <MappingFragment StoreEntitySet="Tbl_Installation">
+                <ScalarProperty Name="Installation_ID" ColumnName="Installation_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="SendSystemRequirements" ColumnName="SendSystemRequirements" />
+                <ScalarProperty Name="InstallationLocation" ColumnName="InstallationLocation" />
+                <ScalarProperty Name="InstallationProgram" ColumnName="InstallationProgram" />
+                <ScalarProperty Name="DeliveryDate_SOHA" ColumnName="DeliveryDate_SOHA" />
+                <ScalarProperty Name="DeliveryDate_Customer" ColumnName="DeliveryDate_Customer" />
+                <ScalarProperty Name="ClientsNumber" ColumnName="ClientsNumber" />
+                <ScalarProperty Name="PurchasedDevicesNumber" ColumnName="PurchasedDevicesNumber" />
+                <ScalarProperty Name="AdministratorPassword" ColumnName="AdministratorPassword" />
+                <ScalarProperty Name="IPServer" ColumnName="IPServer" />
+                <ScalarProperty Name="CPU" ColumnName="CPU" />
+                <ScalarProperty Name="RAM" ColumnName="RAM" />
+                <ScalarProperty Name="SystemType" ColumnName="SystemType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Log">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Log">
+              <MappingFragment StoreEntitySet="Tbl_Log">
+                <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_MainActivity">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_MainActivity">
+              <MappingFragment StoreEntitySet="Tbl_MainActivity">
+                <ScalarProperty Name="MainAct_ID" ColumnName="MainAct_ID" />
+                <ScalarProperty Name="MainActName" ColumnName="MainActName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_OtherRequest">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_OtherRequest">
+              <MappingFragment StoreEntitySet="Tbl_OtherRequest">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="RequestType_ID" ColumnName="RequestType_ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Payment">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Payment">
+              <MappingFragment StoreEntitySet="Tbl_Payment">
+                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="PreInvoiceNumber" ColumnName="PreInvoiceNumber" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PreInvoice">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_PreInvoice">
+              <MappingFragment StoreEntitySet="Tbl_PreInvoice">
+                <ScalarProperty Name="PreInvoice_ID" ColumnName="PreInvoice_ID" />
+                <ScalarProperty Name="PreInvoiceType_ID" ColumnName="PreInvoiceType_ID" />
+                <ScalarProperty Name="PreInvoiceNumber" ColumnName="PreInvoiceNumber" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="SendingStatus" ColumnName="SendingStatus" />
+                <ScalarProperty Name="PreInvoiceUpload" ColumnName="PreInvoiceUpload" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+                <ScalarProperty Name="ConfirmationStatus" ColumnName="ConfirmationStatus" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_PreInvoiceType">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_PreInvoiceType">
+              <MappingFragment StoreEntitySet="Tbl_PreInvoiceType">
+                <ScalarProperty Name="PreInvoiceType_ID" ColumnName="PreInvoiceType_ID" />
+                <ScalarProperty Name="PreInvoiceType" ColumnName="PreInvoiceType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Products">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Products">
+              <MappingFragment StoreEntitySet="Tbl_Products">
+                <ScalarProperty Name="Products_ID" ColumnName="Products_ID" />
+                <ScalarProperty Name="ProductsName" ColumnName="ProductsName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_RequestType">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_RequestType">
+              <MappingFragment StoreEntitySet="Tbl_RequestType">
+                <ScalarProperty Name="RequestType_ID" ColumnName="RequestType_ID" />
+                <ScalarProperty Name="RequestTypeName" ColumnName="RequestTypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ReturnRepairedDevice">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_ReturnRepairedDevice">
+              <MappingFragment StoreEntitySet="Tbl_ReturnRepairedDevice">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="DeviceSerialNumber" ColumnName="DeviceSerialNumber" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="Repairs" ColumnName="Repairs" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Section">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Section">
+              <MappingFragment StoreEntitySet="Tbl_Section">
+                <ScalarProperty Name="Section_ID" ColumnName="Section_ID" />
+                <ScalarProperty Name="Section_Name" ColumnName="Section_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SendToRepair">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_SendToRepair">
+              <MappingFragment StoreEntitySet="Tbl_SendToRepair">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="DeviceSerialNumber" ColumnName="DeviceSerialNumber" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="ProblemInfo" ColumnName="ProblemInfo" />
+                <ScalarProperty Name="PostageDate" ColumnName="PostageDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Software">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Software">
+              <MappingFragment StoreEntitySet="Tbl_Software">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="Software_ID" ColumnName="Software_ID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="DeliveryDescription" ColumnName="DeliveryDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SoftwareType">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_SoftwareType">
+              <MappingFragment StoreEntitySet="Tbl_SoftwareType">
+                <ScalarProperty Name="Software_ID" ColumnName="Software_ID" />
+                <ScalarProperty Name="SoftwareName" ColumnName="SoftwareName" />
+                <ScalarProperty Name="Products_ID" ColumnName="Products_ID" />
+                <ScalarProperty Name="SoftwarePrice" ColumnName="SoftwarePrice" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SubActivity">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_SubActivity">
+              <MappingFragment StoreEntitySet="Tbl_SubActivity">
+                <ScalarProperty Name="SubAct_ID" ColumnName="SubAct_ID" />
+                <ScalarProperty Name="MainAct_ID" ColumnName="MainAct_ID" />
+                <ScalarProperty Name="SubActName" ColumnName="SubActName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SupportServices">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_SupportServices">
+              <MappingFragment StoreEntitySet="Tbl_SupportServices">
+                <ScalarProperty Name="Request_ID" ColumnName="Request_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="Guidance" ColumnName="Guidance" />
+                <ScalarProperty Name="GuidanceDate" ColumnName="GuidanceDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Training">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_Training">
+              <MappingFragment StoreEntitySet="Tbl_Training">
+                <ScalarProperty Name="Training_ID" ColumnName="Training_ID" />
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="CustomerConnector" ColumnName="CustomerConnector" />
+                <ScalarProperty Name="TrainingDate" ColumnName="TrainingDate" />
+                <ScalarProperty Name="NamesOfPeople" ColumnName="NamesOfPeople" />
+                <ScalarProperty Name="ScoreOfPeople" ColumnName="ScoreOfPeople" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_User">
+              <MappingFragment StoreEntitySet="Tbl_User">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PersonnelID" ColumnName="PersonnelID" />
+                <ScalarProperty Name="Section_ID" ColumnName="Section_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_User_Group">
+            <EntityTypeMapping TypeName="CRMModel.Tbl_User_Group">
+              <MappingFragment StoreEntitySet="Tbl_User_Group">
+                <ScalarProperty Name="GrpUser_ID" ColumnName="GrpUser_ID" />
+                <ScalarProperty Name="Group_ID" ColumnName="Group_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastUpdateUser_ID" ColumnName="LastUpdateUser_ID" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateTime" ColumnName="LastUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

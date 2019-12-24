@@ -1,0 +1,1174 @@
+﻿@using SohaCRM.Models.Training;
+@using Web.Framework.UI;
+@using Web.Framework;
+
+@model TrainingListModel
+
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = 10;
+
+    //page title
+    ViewBag.Title = "ثبت درخواست مشتری";
+    //active menu item (system name)
+    //Html.SetActiveMenuItemSystemName("Log");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            امور مشتریان
+        </h1>
+    </div>
+    <div class="jumbotron">
+        <table style="width: 100%; height:100%">
+            <tr style="width: 100%; height:20%">
+                <td style="width:20%; height:20%">
+                    <label ID="Lbl_1" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_1
+                    </label>
+                </td>
+                <td style="width:60%; height:60%">
+                    <label ID="Lbl_2" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_2
+                    </label>
+                </td>
+                <td style="width:20%; height:20%">
+                    <label ID="Lbl_3" Width="60px"
+                           Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                        test_3
+                    </label>
+                </td>
+            </tr>
+            <tr style="width: 100%; height:60%">
+                <td style="width:20%; height:20%"></td>
+                <td style="width:60%; height:60%">
+                    <div style="border-color:lightslategrey; border:double; border-width:1px; width:100%; height:auto; background-color:#eeeeee;">
+                        <fieldset style="margin-right:10px">
+                            <legend style="text-align:right;  font-family:nazanin; font-size:large;">ثبت دوره آموزش</legend>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                        <div style="border-color:lightslategrey; border:double; border-width:1px; width:99%; margin-left:10px; height:auto; background-color:#eeeeee;">
+                                            <fieldset style="margin-right:10px;">
+                                                <legend style="text-align:right;  font-family:nazanin; font-size:large;">جستجوی مشتری</legend>
+                                                <table style="width:100%;">
+                                                    <tr>
+                                                        <td>
+                                                            <table style="width: 98%;">
+                                                                <tr>
+                                                                    <td style="width:530px;">
+                                                                        <div class="panel panel-default" style="direction:rtl; text-align:center; margin-left:5px; font-family:nazanin; font-size:medium;">
+                                                                            <div class="panel-body">
+                                                                                <div id="hardwareSearch-grid" style="overflow-y:scroll;"></div>
+
+                                                                                <script>
+                                                    $(document).ready(function() {
+                                                        $("#hardwareSearch-grid").kendoGrid({
+                                                            dataSource: {
+                                                                type: "json",
+                                                                transport: {
+                                                                    read: {
+                                                                        url: "@Html.Raw(Url.Action("CustomerSearch", "Hardware"))",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: additionalData
+                                                                    }
+                                                                },
+                                                                schema: {
+                                                                    data: "Data",
+                                                                    total: "Total",
+                                                                    errors: "Errors"
+                                                                },
+                                                                error: function (e) {
+                                                                    display_kendoui_grid_error(e);
+                                                                    // Cancel the changes
+                                                                    this.cancelChanges();
+                                                                },
+                                                                pageSize: @(defaultGridPageSize),
+                                                                serverPaging: true,
+                                                                serverFiltering: true,
+                                                                serverSorting: true
+                                                            },
+                                                            pageable: {
+                                                                refresh: true,
+                                                                pageSizes: [@(gridPageSizes)],
+                                                                @Html.Partial("_GridPagerMessages")
+                                                            },
+                                                            height: 110,
+                                                            scrollable: false,
+                                                            selectable: true,
+                                                            pageable: false,
+                                                            dataBound: onDataBound,
+                                                            columns: [
+                                                                {
+                                                                    field: "Customer_ID",
+                                                                    hidden: true
+                                                                },
+                                                                {
+                                                                    field: "CustomerNameInSearch",
+                                                                    title: "نام مشتری",
+                                                                    width: 100
+                                                                }, {
+                                                                    field: "SubscriptionCode",
+                                                                    title: "کد اشتراک",
+                                                                    width: 130
+                                                                }, {
+                                                                    field: "TelNo",
+                                                                    title: "شماره تلفن",
+                                                                    width: 90
+                                                                }, {
+                                                                    field: "MobileNo",
+                                                                    title: "شماره موبایل",
+                                                                    width: 100
+                                                                }, {
+                                                                    field: "ProductsName",
+                                                                    title: "نام محصول",
+                                                                    width: 80
+                                                                }
+                                                            ],
+                                                            change:
+                                                            function () {
+                                                                var selectedRows = this.select();
+                                                                var rowData = this.dataItem(selectedRows[0]);
+                                                                $('#Customer_ID').val(rowData.Customer_ID);
+                                                                $('#CustomerConnector').val(rowData.CustomerConnector);
+                                                                $('#CustomerNameInSearch').val(rowData.CustomerNameInSearch);
+                                                                $('#CustomerName').val(rowData.CustomerNameInSearch);
+                                                                $('#Address').val(rowData.Address);
+                                                                $('#MobileNo').val(rowData.MobileNo);
+                                                                $('#TelNo').val(rowData.TelNo);
+                                                                $('#PostalCode').val(rowData.PostalCode);
+                                                                $('#FaxNo').val(rowData.FaxNo);
+                                                                $('#EconomicalNumber').val(rowData.EconomicalNumber);
+                                                                $('#Email').val(rowData.Email);
+                                                                $('#RegistrationNumber').val(rowData.RegistrationNumber);
+                                                                $('#CompanyRegistrationName').val(rowData.CompanyRegistrationName);
+                                                                $('#CustomerField_ID').val(rowData.CustomerField_ID);
+                                                                $('#NationalID').val(rowData.NationalID);
+                                                                //$('#Hardware_ID').val(rowData.Hardware_ID);
+                                                                $('#SubscriptionCode').val(rowData.SubscriptionCode);
+
+                                                                var data1 = $('form').serialize();
+                                                                $.ajax({
+                                                                    cache: false,
+                                                                    type: "POST",
+                                                                    url: "@(Url.Action("HardwareList", "Hardware"))",
+                                                                    data: data1,
+                                                                    complete: function(data) {
+                                                                        $('#hardwareReq-grid').data('kendoGrid').dataSource.read();
+                                                                        $('#hardwareReq-grid').data('kendoGrid').refresh();
+                                                                    },
+                                                                    error: function(xhr, ajaxOptions, thrownError) {
+                                                                        alert(thrownError);
+                                                                    },
+                                                                    traditional: true
+                                                                });
+
+                                                            }
+
+                                                        });
+                                                    });
+                                                                                </script>
+                                                                                <script type="text/javascript">
+                            var selectedIds = [];
+
+                            $(document).ready(function() {
+                                //search button
+
+
+                                @*$("#@Html.FieldIdFor(model => model.Message)").keydown(function(event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-log").click();
+                                        return false;
+                                    }
+                                });*@
+
+                                //"delete selected" button
+                                $('#delete-selected').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                    };
+                                    addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("DeleteSelected", "Log"))",
+                                        data: postData,
+                                        complete: function(data) {
+                                            //reload grid
+                                            var grid = $('#log-grid').data('kendoGrid');
+                                            grid.dataSource.page(1); //new search. Set page size to 1
+                                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                            //clear selected checkboxes
+                                            $('.checkboxGroups').attr('checked', false).change();
+                                            selectedIds = [];
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                });
+
+                                $('#mastercheckbox').click(function() {
+                                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                                });
+
+                                //wire up checkboxes.
+                                $('#log-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function(e) {
+                                    var $check = $(this);
+                                    if ($check.is(":checked") == true) {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked == -1) {
+                                            //add id to selectedIds.
+                                            selectedIds.push($check.val());
+                                        }
+                                    } else {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked > -1) {
+                                            //remove id from selectedIds.
+                                            selectedIds = $.grep(selectedIds, function(item, index) {
+                                                return item != $check.val();
+                                            });
+                                        }
+                                    }
+                                    updateMasterCheckbox();
+                                });
+                            });
+
+                            @*function additionalData() {
+                                var data = {
+                                    CreatedOnFrom: $('#@Html.FieldIdFor(model => model.CreatedOnFrom)').val(),
+                                    CreatedOnTo: $('#@Html.FieldIdFor(model => model.CreatedOnTo)').val(),
+                                    Message: $('#@Html.FieldIdFor(model => model.Message)').val(),
+                                    LogLevelId: $('#@Html.FieldIdFor(model => model.LogLevelId)').val()
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }*@
+
+                            function onDataBound(e) {
+                                $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function() {
+                                    var currentId = $(this).val();
+                                    var checked = jQuery.inArray(currentId, selectedIds);
+                                    //set checked based on if current checkbox's value is in selectedIds.
+                                    $(this).attr('checked', checked > -1);
+                                });
+
+                                updateMasterCheckbox();
+                            }
+
+                            function updateMasterCheckbox() {
+                                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                                var numChkBoxesChecked = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                            }
+                                                                                </script>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td>
+                                                            <table>
+                                                                <tr>
+                                                                    <td style="width:150px; height:40px">
+                                                                        @Html.TextBoxFor(m => m.CustomerNameInSearch, new { style = "direction:rtl; font-family:'B Nazanin'; width:150px; height:25px;", tabindex = 1 })
+                                                                    </td>
+                                                                    <td style="width:80px; height:40px">
+                                                                        <label ID="Lbl_CustomerName"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px;">
+                                                                            : نام مشتری
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width:150px; height:40px">
+                                                                        @Html.TextBoxFor(m => m.SubscriptionCode, new { style = "direction:rtl; font-family:'B Nazanin'; width:150px; height:25px;", tabindex = 2 })
+                                                                    </td>
+                                                                    <td style="width:80px; height:40px">
+                                                                        <label ID="Lbl_SubscriptionCode"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px;">
+                                                                            : کد اشتراک
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width:150px; height:40px">
+                                                                        @Html.TextBoxFor(m => m.TelNo, new { style = "direction:rtl; font-family:'B Nazanin'; width:150px; height:25px;", tabindex = 3 })
+                                                                    </td>
+                                                                    <td style="width:80px; height:40px">
+                                                                        <label ID="Lbl_TelNo"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px;">
+                                                                            : شماره تلفن
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width:150px; height:40px">
+                                                                        @Html.TextBoxFor(m => m.MobileNo, new { style = "direction:rtl; font-family:'B Nazanin'; width:150px; height:25px;", tabindex = 4 })
+                                                                    </td>
+                                                                    <td style="width:80px; height:40px">
+                                                                        <label ID="Lbl_MobileNo"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px;">
+                                                                            : شماره موبایل
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width:150px; height:40px">
+                                                                        <label ID="Lbl_MobileNo"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px; visibility:hidden;">
+                                                                            test
+                                                                        </label>
+                                                                    </td>
+                                                                    <td style="width:80px; height:40px">
+                                                                        <label ID="Lbl_MobileNo"
+                                                                               style="text-align: right; font-family:nazanin; font-size:large; width:80px; visibility:hidden;">
+                                                                            test
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <table>
+                                                    <tr>
+                                                        <td style="width:240px; height:40px">
+                                                            <label ID="Lbl_16" Width="240px"
+                                                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                                test_16
+                                                            </label>
+                                                        </td>
+                                                        <td style="width:150px; height:40px">
+                                                            <button id="Btn_SubmitCustomer" type="button" class="btn btn-primary btn-search">
+                                                                <i class="fa fa-save">
+                                                                </i>
+                                                                <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                                    ثبت مشتری
+                                                                </span>
+                                                            </button>
+                                                        </td>
+                                                        <td style="width:15px; height:40px">
+                                                            <label ID="Lbl_17" Width="15px"
+                                                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                                tst
+                                                            </label>
+                                                        </td>
+                                                        <td style="width:150px; height:40px">
+                                                            <button id="Btn_SearchCustomer" class="btn btn-primary btn-search" tabindex=5>
+                                                                <i class="fa fa-search">
+                                                                </i>
+                                                                <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                                    جستجو
+                                                                </span>
+                                                            </button>
+                                                        </td>
+                                                        <td style="width:240px; height:40px">
+                                                            <label ID="Lbl_19" Width="240px"
+                                                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                                test_19
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <table>
+                                                    <tr>
+                                                        <td style="width:60%; height:60%">
+                                                            <label ID="Lbl_20" Width="60px"
+                                                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                                test_20
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                </table>
+                                            </fieldset>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_7" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        <label ID="Lbl_10"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:220px; visibility:hidden;">
+                                            test_10
+                                        </label>
+                                    </td>
+                                    <td style="width:105px; height:40px">
+                                        <label ID="Lbl_9"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:105px; visibility:hidden;">
+                                            test_9
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_8" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_8
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        <label ID="Lbl_7" Width="220px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:100px; height:40px">
+                                        <label ID="Lbl_7" Width="100px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_11" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_11
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_5" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_5
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.CustomerConnector, new { style = "direction:rtl; font-family:'B Nazanin'; width:220px; height:25px; font-size:medium;", tabindex = 6, maxlength = 100 })
+                                    </td>
+                                    <td style="width:135px; height:40px">
+                                        <label ID="Lbl_CustomerConnector"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:135px;">
+                                            : نام رابط
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_7" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.CustomerName, new { @readonly = true, style = "direction:rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;"})
+                                    </td>
+                                    <td style="width:95px; height:40px">
+                                        <label ID="Lbl_CustomerName"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:95px;">
+                                            : نام مشتری
+                                        </label>
+                                    </td>
+                                    <td style="width:10px; height:40px">
+                                        <label ID="Lbl_10"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:10px; visibility:hidden;">
+                                            test_10
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_5" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_5
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                    </td>
+                                    <td style="width:135px; height:40px">
+                                        <label ID="Lbl_CustomerConnector"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:135px;">
+                                            
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_7" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.TrainingDate, new { @readonly = true, style = "direction:rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;" })
+                                    </td>
+                                    <td style="width:95px; height:40px">
+                                        <label ID="Lbl_CustomerName"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:95px;">
+                                            : تاریخ
+                                        </label>
+                                    </td>
+                                    <td style="width:10px; height:40px">
+                                        <label ID="Lbl_10"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:10px; visibility:hidden;">
+                                            test_10
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_5" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_5
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextAreaFor(m => m.ScoreOfPeople, new { style = "direction:rtl; font-family:'B Nazanin'; width:220px; height:100px; font-size:medium;", tabindex = 6, maxlength = 100 })
+                                    </td>
+                                    <td style="width:135px; height:40px">
+                                        <label ID="Lbl_CustomerConnector"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:135px;">
+                                            : نمره افراد آموزش دیده
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_7" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.NamesOfPeople, new {  style = "direction:rtl; font-family:nazanin; width:220px;  height:100px; font-size:medium;" })
+                                    </td>
+                                    <td style="width:95px; height:40px">
+                                        <label ID="Lbl_CustomerName"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:95px;">
+                                            : نام افراد آموزش دیده
+                                        </label>
+                                    </td>
+                                    <td style="width:10px; height:40px">
+                                        <label ID="Lbl_10"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:10px; visibility:hidden;">
+                                            test_10
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_5" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_5
+                                        </label>
+                                    </td>
+                                    <td style="width:610px; height:40px">
+                                        @Html.TextAreaFor(m => m.Description, new { rows = 4, tabindex = 9, maxlength = 200, style = "width:100%; height:70px; direction:rtl; font-family:nazanin; font-size:medium;" })
+                                    </td>
+                                    <td style="width:95px; height:40px">
+                                        <label ID="Lbl_Description"
+                                               style="text-align: right; font-family:nazanin; font-size:large; width:95px;">
+                                            : توضیحات
+                                        </label>
+                                    </td>
+                                    <td style="width:30px; height:40px">
+                                        <label ID="Lbl_6" Width="30px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_6
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                        @Html.TextBoxFor(m => m.Customer_ID, new { style = "visibility:hidden; width:0px;" })
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        @Html.TextBoxFor(m => m.Training_ID, new { style = "visibility:hidden; width:0px;" })
+                                    </td>
+                                    <td style="width:105px; height:40px">
+                                        <label ID="Lbl_9"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:105px; visibility:hidden;">
+                                            test_9
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_8" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_8
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        <label ID="Lbl_7" Width="220px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:100px; height:40px">
+                                        <label ID="Lbl_7" Width="100px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_11" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_11
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <table>
+                                <tr>
+                                    <td style="width:50px; height:40px">
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                    </td>
+                                    <td style="width:105px; height:40px">
+                                        <label ID="Lbl_9"
+                                               style="text-align: right; font-family:'B Nazanin'; font-size:large; width:105px; visibility:hidden;">
+                                            test_9
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_8" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_8
+                                        </label>
+                                    </td>
+                                    <td style="width:220px; height:40px">
+                                        <label ID="Lbl_7" Width="220px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:100px; height:40px">
+                                        <label ID="Lbl_7" Width="100px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_7
+                                        </label>
+                                    </td>
+                                    <td style="width:50px; height:40px">
+                                        <label ID="Lbl_11" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_11
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="width:100%; height:100%">
+                                <tr>
+                                    <td style="width:150px; height:40px">
+                                        <label ID="Lbl_16" Width="150px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_16
+                                        </label>
+                                    </td>
+                                    <td style="width:150px; height:40px">
+                                        <button id="Btn_Search" type="button" class="btn btn-primary btn-search" tabindex=12>
+                                            <i class="fa fa-search">
+                                            </i>
+                                            <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                جستجو
+                                            </span>
+                                        </button>
+                                    </td>
+                                    <td style="width:15px; height:40px">
+                                        <label ID="Lbl_17" Width="15px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            tst
+                                        </label>
+                                    </td>
+                                    <td style="width:150px; height:40px">
+                                        <button id="Btn_New" class="btn btn-primary btn-search" tabindex=11>
+                                            <i class="fa fa-pencil">
+                                            </i>
+                                            <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                جدید
+                                            </span>
+                                        </button>
+                                    </td>
+                                    <td style="width:15px; height:40px">
+                                        <label ID="Lbl_18" Width="15px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            tst
+                                        </label>
+                                    </td>
+                                    <td style="width:150px; height:40px">
+                                        <button id="Btn_Submit" class="btn btn-primary btn-search" tabindex=10>
+                                            <i class="fa fa-save">
+                                            </i>
+                                            <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                ثبت
+                                            </span>
+                                        </button>
+                                    </td>
+                                    <td style="width:150px; height:40px">
+                                        <label ID="Lbl_19" Width="150px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_19
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table style="width:100%; height:100%">
+                                <tr>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_18" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_18
+                                        </label>
+                                    </td>
+                                    <td style="width:34%; text-align:center;">
+                                        <label id="Message" style="color:red; text-align: center; font-family:nazanin; font-size:small;width:100%;"></label>
+                                    </td>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_21" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_18" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_18
+                                        </label>
+                                    </td>
+                                    <td style="width:34%;">
+                                        <label ID="Lbl_21" Width="34%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                    <td style="width:33%;">
+                                        <label ID="Lbl_21" Width="33%"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            test_21
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td style="width:8%; height:20%">
+                                        <label ID="Lbl_3" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            tst
+                                        </label>
+                                    </td>
+                                    <td style="width:710px;">
+                                        <div class="panel panel-default" style="direction:rtl; text-align:center; font-family:nazanin; font-size:medium;">
+                                            <div class="panel-body">
+                                                <div id="hardwareReq-grid" style="overflow-y:scroll;"></div>
+
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#TrainingDate").pDatepicker({
+                                                            initialValue: false,
+                                                            format: 'YYYY/MM/DD',
+                                                            autoClose: true
+                                                        });
+
+                                                        $("#RequestDate").pDatepicker({
+                                                            initialValue: false,
+                                                            format: 'YYYY/MM/DD',
+                                                            autoClose: true
+                                                        });
+
+                                                        $("#hardwareReq-grid").kendoGrid({
+                                                            dataSource: {
+                                                                type: "json",
+                                                                transport: {
+                                                                    read: {
+                                                                        url: "@Html.Raw(Url.Action("HardwareList", "Hardware"))",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: additionalData
+                                                                    }
+                                                                },
+                                                                schema: {
+                                                                    data: "Data",
+                                                                    total: "Total",
+                                                                    errors: "Errors"
+                                                                },
+                                                                error: function (e) {
+                                                                    display_kendoui_grid_error(e);
+                                                                    // Cancel the changes
+                                                                    this.cancelChanges();
+                                                                },
+                                                                pageSize: @(defaultGridPageSize),
+                                                                serverPaging: true,
+                                                                serverFiltering: true,
+                                                                serverSorting: true
+                                                            },
+                                                            pageable: {
+                                                                refresh: true,
+                                                                pageSizes: [@(gridPageSizes)],
+                                                                @Html.Partial("_GridPagerMessages")
+                                                            },
+                                                            height: 250,
+                                                            scrollable: false,
+                                                            selectable: true,
+                                                            pageable: false,
+                                                            dataBound: onDataBound,
+                                                            columns: [
+                                                                {
+                                                                    field: "Request_ID",
+                                                                    hidden: true
+                                                                },
+                                                                {
+                                                                    field: "CustomerName",
+                                                                    title: "نام مشتری",
+                                                                    width: 150
+                                                                }, {
+                                                                    field: "CustomerConnector",
+                                                                    title: "نام رابط",
+                                                                    width: 150
+                                                                }, {
+                                                                    field: "Hardware_ID",
+                                                                    hidden: true
+                                                                }, {
+                                                                    field: "DeliveryDate",
+                                                                    hidden: true
+                                                                }, {
+                                                                    field: "HardwareTypeDescription",
+                                                                    hidden: true
+                                                                }, {
+                                                                    field: "Hardware",
+                                                                    title: "نام سخت افزار",
+                                                                    width: 150,
+                                                                }, {
+                                                                    field: "Amount",
+                                                                    title: "مبلغ سخت افزار",
+                                                                    width: 130
+                                                                }, {
+                                                                    field: "RequestDate",
+                                                                    title: "تاریخ درخواست",
+                                                                    width: 130
+                                                                }
+                                                            ],
+                                                            change:
+                                                            function () {
+                                                                var selectedRows = this.select();
+                                                                var rowData = this.dataItem(selectedRows[0]);
+                                                                $('#Customer_ID').val(rowData.Customer_ID);
+                                                                $('#CustomerConnector').val(rowData.CustomerConnector);
+                                                                $('#CustomerName').val(rowData.CustomerName);
+                                                                $('#Address').val(rowData.Address);
+                                                                $('#MobileNo').val(rowData.MobileNo);
+                                                                $('#TelNo').val(rowData.TelNo);
+                                                                $('#PostalCode').val(rowData.PostalCode);
+                                                                $('#FaxNo').val(rowData.FaxNo);
+                                                                $('#EconomicalNumber').val(rowData.EconomicalNumber);
+                                                                $('#Description').val(rowData.Description);
+                                                                $('#HardwareTypeDescription').val(rowData.HardwareTypeDescription);
+                                                                $('#RegistrationNumber').val(rowData.RegistrationNumber);
+                                                                $('#RequestDate').val(rowData.RequestDate);
+                                                                $('#CustomerField_ID').val(rowData.CustomerField_ID);
+                                                                $('#NationalID').val(rowData.NationalID);
+                                                                $('#Hardware_ID').val(rowData.Hardware_ID);
+                                                                $('#SubscriptionCode').val(rowData.SubscriptionCode);
+                                                                $('#Amount').val(rowData.Amount);
+                                                                $('#Request_ID').val(rowData.Request_ID);
+                                                                $('#DeliveryDate').val(rowData.DeliveryDate);
+                                                                $("#Message").html("");
+                                                                $('#DeliveryDescription').val(rowData.DeliveryDescription);
+                                                                $('#DeliveryDeviceSerialNumber').val(rowData.DeliveryDeviceSerialNumber);
+                                                                if (rowData.Check_Delivery && !rowData.Check_Revocation) {
+                                                                    $('#Check_Delivery').prop('checked', true);
+                                                                    $('#Check_Revocation').prop('checked', false);
+                                                                }
+                                                                else if (rowData.Check_Revocation && !rowData.Check_Delivery) {
+                                                                    $('#Check_Revocation').prop('checked', true);
+                                                                    $('#Check_Delivery').prop('checked', false);
+                                                                }
+                                                                else {
+                                                                    $('#Check_Revocation').prop('checked', false);
+                                                                    $('#Check_Delivery').prop('checked', false);
+                                                                }
+                                                                //alert(rowData.Check_Delivery + " g g " + rowData.Check_Delivery);
+
+                                                                $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ویرایش</span>");
+                                                            }
+                                                        });
+                                                    });
+                                                </script>
+                                                <script type="text/javascript">
+                            var selectedIds = [];
+
+                                                    $(document).ready(function () {
+
+                                                        function IsFormValid() {
+
+                                                            var alph_patt = /^[a-zA-Z ضصيكثقفغعهخحجچپشسیبلاتنمکگظطزرژءذدئوآ]*$/;
+                                                            var num_patt = /^[0-9]*$/;
+                                                            var alphnumeric = /^[a-zA-Z ضصيكثقفغعهخحجچپشسیبلاتنمکگظطزرژءذدئوآ0123456789]*$/;
+                                                            //console.log(alph_patt.test($('#CustomerConnector').val()));
+
+                                                            if ($('#CustomerName').val() == "") {
+                                                                ShowModal("مشتری انتخاب نشده است")
+                                                                return false;
+                                                            }
+                                                            else if ($('#CustomerConnector').val() == "") {
+                                                                ShowModal("لطفاً فیلد رابط را پر کنید")
+                                                                return false;
+                                                            }
+                                                            else if (!alphnumeric.test($('#CustomerConnector').val())) {
+                                                                ShowModal("فیلد نام رابط حاوی کاراکتر غیرمجاز است")
+                                                                return false;
+                                                            }
+
+                                                            else if ($('#Amount').val() == "") {
+                                                                ShowModal("فیلد مبلغ خالیست")
+                                                                return false;
+                                                            }
+                                                            else if (!num_patt.test($('#Amount').val())) {
+                                                                ShowModal("فیلد مبلغ حاوی کاراکتر غیرمجاز است")
+                                                                return false;
+                                                            }
+                                                            else if ($('#Hardware_ID').val() == "") {
+                                                                ShowModal("نام سخت افزار انتخاب نشده است")
+                                                                return false;
+                                                            }
+                                                            else if ($('#RequestDate').val() == "") {
+                                                                ShowModal("لطفاً فیلد تاریخ درخواست را پر کنید")
+                                                                return false;
+                                                            }
+
+                                                            return true;
+                                                        }
+
+                                                        function ShowModal(txt) {
+                                                            $("#modalcontent").html(txt);
+                                                            $('#myModal').modal();
+                                                        }
+
+                                //search button
+                                                        $('#Btn_Submit').click(function () {
+                                                            if (!IsFormValid()) {
+                                                                //alert("form not valid!")
+
+                                                                return false;
+                                                            }
+                                                            else {
+                                                                var data1 = $('form').serialize();
+                                                                $.ajax({
+                                                                    url: '@Url.Action("SubmitHardware", "Hardware")',
+                                                                    type: 'POST',
+                                                                    data: data1,
+                                                                    success: function (Data) {
+                                                                        $("#Message").html("<text style='color:" + Data.ExtraData.MessageColor + "'>" + Data.ExtraData.Message + "</text>");
+                                                                    }
+                                                                }).done(function () {
+                                                                    $('form').trigger("reset");
+                                                                    $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ثبت</span>");
+                                                                    $('#hardwareReq-grid').data('kendoGrid').dataSource.read();
+                                                                    $('#hardwareReq-grid').data('kendoGrid').refresh();
+                                                                });
+                                                                return false;
+                                                            }
+                                });
+
+                            $('#Btn_SearchCustomer').click(function () {
+                                //alert("dd");
+                                //search
+                                var grid = $('#hardwareSearch-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                ////grid.dataSource.read(); we already loaded the grid above using "page" function
+                                ////clear selected checkboxes
+                                //$('.checkboxGroups').attr('checked', false).change();
+                                //selectedIds = [];
+                                return false;
+                                                        });
+
+                            $('#Btn_Search').click(function () {
+                                //alert("dd");
+                                //search
+                                var grid = $('#hardwareReq-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+                                ////grid.dataSource.read(); we already loaded the grid above using "page" function
+                                ////clear selected checkboxes
+                                //$('.checkboxGroups').attr('checked', false).change();
+                                //selectedIds = [];
+                                return false;
+                            });
+
+                            $('#Btn_New').click(function () {
+                                $('form').trigger("reset");
+                                $("#Message").html("");
+                                $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ثبت</span>");
+                                var grid = $('#hardwareSearch-grid').data('kendoGrid');
+                                grid.dataSource.page(1); //new search. Set page size to 1
+
+                                return false;
+                            });
+
+                            $('#Hardware_ID').change(function () {
+                                                        var data1 = $('form').serialize();
+                            var data1 = $('form').serialize();
+                                            $.ajax({
+                                            url: '@Url.Action("GetHardwareInfo", "Hardware")',
+                                            type: 'POST',
+                                            dataType: "json",
+                                            data: data1,
+                                            success: function (data) {
+                                                $('#Amount').val(data.Amount);
+                                                $('#HardwareTypeDescription').val(data.HardwareTypeDescription);
+                                }
+                            }).done(function () {
+                                //alert('Modify Movie');
+                                                });
+                            return false;
+                             });
+
+                                $('#Check_Delivery').change(function () {
+                                    if (this.checked) {
+                                        $('#Check_Revocation').prop('checked', false);
+                                    }
+                                });
+
+                                $('#Check_Revocation').change(function () {
+                                    if (this.checked) {
+                                        $('#Check_Delivery').prop('checked', false);
+                                    }
+                                });
+
+
+                                @*$("#@Html.FieldIdFor(model => model.Message)").keydown(function(event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-log").click();
+                                        return false;
+                                    }
+                                });*@
+
+                                //"delete selected" button
+                                $('#delete-selected').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                    };
+                                    addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("DeleteSelected", "Log"))",
+                                        data: postData,
+                                        complete: function(data) {
+                                            //reload grid
+                                            var grid = $('#log-grid').data('kendoGrid');
+                                            grid.dataSource.page(1); //new search. Set page size to 1
+                                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                            //clear selected checkboxes
+                                            $('.checkboxGroups').attr('checked', false).change();
+                                            selectedIds = [];
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                });
+
+                                $('#mastercheckbox').click(function() {
+                                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                                                    });
+
+                                $('#Btn_SubmitCustomer').click(function () {
+
+                                                    window.location.href = "../Customer/Customer?returnurl=../Hardware/Hardware_req";
+                                });
+
+                                //wire up checkboxes.
+                                $('#log-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function(e) {
+                                    var $check = $(this);
+                                    if ($check.is(":checked") == true) {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked == -1) {
+                                            //add id to selectedIds.
+                                            selectedIds.push($check.val());
+                                        }
+                                    } else {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked > -1) {
+                                            //remove id from selectedIds.
+                                            selectedIds = $.grep(selectedIds, function(item, index) {
+                                                return item != $check.val();
+                                            });
+                                        }
+                                    }
+                                    updateMasterCheckbox();
+                                });
+                            });
+
+                            function additionalData() {
+                                var data = {
+                                    CustomerName: $('#@Html.FieldIdFor(model => model.CustomerName)').val(),
+                                    SubscriptionCode: $('#@Html.FieldIdFor(model => model.SubscriptionCode)').val(),
+                                    TelNo: $('#@Html.FieldIdFor(model => model.TelNo)').val(),
+                                    MobileNo: $('#@Html.FieldIdFor(model => model.MobileNo)').val(),
+                                    Customer_ID: $('#@Html.FieldIdFor(model => model.Customer_ID)').val(),
+                                    CustomerNameInSearch: $('#@Html.FieldIdFor(model => model.CustomerNameInSearch)').val(),
+                                                    CustomerConnector: $('#@Html.FieldIdFor(model => model.CustomerConnector)').val(),
+                                                    RequestDate: $('#RequestDate').val(),
+                                                    Description: $('#@Html.FieldIdFor(model => model.Description)').val()
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+
+                            function onDataBound(e) {
+                                $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function() {
+                                    var currentId = $(this).val();
+                                    var checked = jQuery.inArray(currentId, selectedIds);
+                                    //set checked based on if current checkbox's value is in selectedIds.
+                                    $(this).attr('checked', checked > -1);
+                                });
+
+                                updateMasterCheckbox();
+                            }
+
+                            function updateMasterCheckbox() {
+                                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                                var numChkBoxesChecked = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                            }
+                                                </script>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="width:8%; height:20%">
+                                        <label ID="Lbl_3" Width="60px"
+                                               Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                            tst
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </div>
+                </td>
+                <td style="width:20%; height:20%"></td>
+            </tr>
+            <tr style="width: 100%; height:20%">
+                <td style="width:20%; height:20%"></td>
+                <td style="width:60%; height:60%"></td>
+                <td style="width:20%; height:20%"></td>
+            </tr>
+        </table>
+    </div>
+}

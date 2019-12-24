@@ -1,0 +1,731 @@
+﻿@using SohaCRM.Models.User;
+@using Web.Framework.UI;
+@using Web.Framework;
+
+@model UserListModel
+
+@{
+    var defaultGridPageSize = 20;
+    var gridPageSizes = 10;
+
+    //page title
+    ViewBag.Title = "کاربران";
+    //active menu item (system name)
+    //Html.SetActiveMenuItemSystemName("Log");
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            مدیریت کاربران
+        </h1>
+        @*<div class="pull-right">
+            <button type="button" id="delete-selected" class="btn bg-red">
+                <i class="fa fa-trash-o"></i>
+                Delete
+            </button>
+            @Html.ActionConfirmation("clearall")
+        </div>*@
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <table style="width:100%; height:100%">
+                    <tr style="width: 100%; height:20%">
+                        <td style="width:20%; height:20%">
+                            <label ID="Lbl_1" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_1
+                            </label>
+                        </td>
+                        <td style="width:60%; height:60%">
+                            <label ID="Lbl_2" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_2
+                            </label>
+                        </td>
+                        <td style="width:20%; height:20%">
+                            <label ID="Lbl_3" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_3
+                            </label>
+                        </td>
+                    </tr>
+                    <tr style="width: 100%; height:60%">
+                        <td style="width:20%; height:20%"></td>
+                        <td style="width:60%; height:60%">
+                            <div style="border-color:lightslategrey; border:double; border-width:1px; width:100%; height:auto; background-color:#eeeeee;">
+                                <fieldset style="margin-right:10px">
+                                    <legend style="text-align:right; font-family:nazanin; font-size:large;">ثبت کاربر</legend>
+                                    <table style="width:100%; height:100%">
+                                        <tr>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_5" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_5
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.TextBoxFor(m => m.LastName, new { style = "direction: rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;", tabindex = 2, maxlength = 100 })
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_LastName"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:100px;">
+                                                    : نام خانوادگی
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_15" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_15
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.TextBoxFor(m => m.Name, new { style = "direction: rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;", tabindex = 1, maxlength = 100 })
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_Name"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:70px;">
+                                                    : نام
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_6" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_6
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_7" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_7
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.TextBoxFor(m => m.PersonelID, new { style = "direction: rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;", tabindex=4, maxlength = 30 })
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_LastName"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:100px;">
+                                                    : شماره پرسنلی
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_8" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_8
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.DropDownListFor(m => m.Section_ID, Model.Sections, "انتخاب کنید", new { style = "width:220px; height:25px; font-family:nazanin; direction:rtl; font-size:medium;", tabindex=3 })
+                                                @*<select id="Section" style="width:220px; height:25px; font-family:nazanin; direction:rtl; font-size:medium;">
+                                        <option>انتخاب کنید</option>
+                                    </select>*@
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_Section"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:70px;">
+                                                    : سمت
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_11" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_11
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_12" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_12
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.TextBoxFor(m => m.Password, new { style = "direction: rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;", tabindex=6, maxlength = 50 })
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_Password"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:100px;">
+                                                    : رمز عبور
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_13" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_13
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.TextBoxFor(m => m.UserName, new { style = "direction: rtl; font-family:nazanin; width:220px; height:25px; font-size:medium;", tabindex=5, maxlength = 50 })
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_UserName"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:70px;">
+                                                    : نام کاربری
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_14" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_14
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_7" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_7
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                <label ID="Lbl_10"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:220px; visibility:hidden;">
+                                                    test_10
+                                                </label>
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_9"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:100px; visibility:hidden;">
+                                                    test_9
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_8" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_8
+                                                </label>
+                                            </td>
+                                            <td style="width:220px; height:40px">
+                                                @Html.DropDownListFor(m => m.IsActive_ID, Model.Active, "انتخاب کنید", new { style = "width:220px; height:25px; font-family:nazanin; direction:rtl; font-size:medium;", tabindex = 7 })
+                                                @*<select id="IsActive" name="IsActive" style="width:220px; height:25px; font-family:nazanin; direction:rtl; font-size:medium;" tabindex=7>
+                                                    <option value>انتخاب کنید</option>
+                                                    <option value="0">غیرفعال</option>
+                                                    <option value="1">فعال</option>
+                                                </select>*@
+                                            </td>
+                                            <td style="width:100px; height:40px">
+                                                <label ID="Lbl_Active"
+                                                       style="text-align: right; font-family:nazanin; font-size:large; width:70px;">
+                                                    : وضعیت
+                                                </label>
+                                            </td>
+                                            <td style="width:50px; height:40px">
+                                                <label ID="Lbl_11" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_11
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:60%; height:60%">
+                                                @Html.TextBoxFor(m => m.User_ID, new { style = "visibility:hidden; width:0px" })
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <td style="width:150px; height:40px">
+                                                <label ID="Lbl_16" Width="150px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_16
+                                                </label>
+                                            </td>
+                                            <td style="width:150px; height:40px">
+                                                <button id="Btn_Search" type="button" class="btn btn-primary btn-search" tabindex=10>
+                                                    <i class="fa fa-search">
+                                                    </i>
+                                                    <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                        جستجو
+                                                    </span>
+                                                </button>
+                                            </td>
+                                            <td style="width:15px; height:40px">
+                                                <label ID="Lbl_17" Width="15px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    tst
+                                                </label>
+                                            </td>
+                                            <td style="width:150px; height:40px">
+                                                <button id="Btn_New" class="btn btn-primary btn-search" tabindex=9>
+                                                    <i class="fa fa-pencil">
+                                                    </i>
+                                                    <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                        جدید
+                                                    </span>
+                                                </button>
+                                            </td>
+                                            <td style="width:15px; height:40px">
+                                                <label ID="Lbl_18" Width="15px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    tst
+                                                </label>
+                                            </td>
+                                            <td style="width:150px; height:40px">
+                                                <button id="Btn_Submit" class="btn btn-primary btn-search" tabindex=8>
+                                                    <i class="fa fa-save">
+                                                    </i>
+                                                    <span style="font-family:nazanin; font-size:large; font-weight:bold;">
+                                                        ثبت
+                                                    </span>
+                                                </button>
+                                            </td>
+                                            <td style="width:150px; height:40px">
+                                                <label ID="Lbl_19" Width="150px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_19
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table style="width:100%; height:100%">
+                                        <tr>
+                                            <td style="width:33%;">
+                                                <label ID="Lbl_18" Width="33%"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_18
+                                                </label>
+                                            </td>
+                                            <td style="width:34%; text-align:center;">
+                                                <label id="Message" style="color:red; text-align: center; font-family:nazanin; font-size:small;width:100%;"></label>
+                                            </td>
+                                            <td style="width:33%;">
+                                                <label ID="Lbl_21" Width="33%"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_21
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:33%;">
+                                                <label ID="Lbl_18" Width="33%"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_18
+                                                </label>
+                                            </td>
+                                            <td style="width:34%;">
+                                                <label ID="Lbl_21" Width="34%"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_21
+                                                </label>
+                                            </td>
+                                            <td style="width:33%;">
+                                                <label ID="Lbl_21" Width="33%"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_21
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <td style="width:4%; height:20%">
+                                                <label ID="Lbl_3" Width="20px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_3
+                                                </label>
+                                            </td>
+                                            <td style="width:770px;">
+                                                    <div class="panel panel-default" style="direction:rtl; text-align:center; font-family:nazanin; font-size:medium;">
+                                                        <div class="panel-body">
+                                                            <div id="user-grid"  style="overflow-y:scroll;"></div>
+
+                                                            <script>
+                                                    $(document).ready(function() {
+                                                        $("#user-grid").kendoGrid({
+                                                            dataSource: {
+                                                                type: "json",
+                                                                transport: {
+                                                                    read: {
+                                                                        url: "@Html.Raw(Url.Action("UserList", "User"))",
+                                                                        type: "POST",
+                                                                        dataType: "json",
+                                                                        data: additionalData
+                                                                    }
+                                                                },
+                                                                schema: {
+                                                                    data: "Data",
+                                                                    total: "Total",
+                                                                    errors: "Errors"
+                                                                },
+                                                                error: function (e) {
+                                                                    display_kendoui_grid_error(e);
+                                                                    // Cancel the changes
+                                                                    this.cancelChanges();
+                                                                },
+                                                                pageSize: @(defaultGridPageSize),
+                                                                serverPaging: true,
+                                                                serverFiltering: true,
+                                                                serverSorting: true
+                                                            },
+                                                            pageable: {
+                                                                refresh: true,
+                                                                pageSizes: [@(gridPageSizes)],
+                                                                @Html.Partial("_GridPagerMessages")
+                                                            },
+                                                            height: 250,
+                                                            scrollable: false,
+                                                            selectable: true,
+                                                            pageable: false,
+                                                            dataBound: onDataBound,
+                                                            columns: [
+                                                                {
+                                                                    field: "User_ID",
+                                                                    title: "آی‌دی",
+                                                                    hidden: true
+                                                                }, {
+                                                                    field: "Name",
+                                                                    title: "نام",
+                                                                    width: 100
+                                                                }, {
+                                                                    field: "LastName",
+                                                                    title: "نام خانوادگی",
+                                                                    width: 150
+                                                                }, {
+                                                                    field: "Section",
+                                                                    title: "سمت",
+                                                                    width: 70
+                                                                }, {
+                                                                    field: "Section_ID",
+                                                                    title: "سمت",
+                                                                    hidden:true
+                                                                }, {
+                                                                    field: "PersonelID",
+                                                                    title: "شماره پرسنلی",
+                                                                    width: 120
+                                                                }, {
+                                                                    field: "UserName",
+                                                                    title: "نام کاربری",
+                                                                    width: 130
+                                                                }, {
+                                                                    field: "Password",
+                                                                    title: "رمز عبور",
+                                                                    width: 130
+                                                                }, {
+                                                                    field: "IsActive_ID",
+                                                                    title: "وضعیت",
+                                                                    hidden:true
+                                                                }, {
+                                                                    field: "IsActive",
+                                                                    title: "وضعیت",
+                                                                    width: 80
+                                                                }
+
+                                                            ],
+                                                            change:
+                                                            function () {
+                                                                var selectedRows = this.select();
+                                                                var rowData = this.dataItem(selectedRows[0]);
+                                                                $('#Name').val(rowData.Name);
+                                                                $('#LastName').val(rowData.LastName);
+                                                                $('#UserName').val(rowData.UserName);
+                                                                $('#Password').val(rowData.Password);
+                                                                $('#PersonelID').val(rowData.PersonelID);
+                                                                $('#Section_ID').val(rowData.Section_ID);
+                                                                $('#IsActive_ID').val(rowData.IsActive_ID);
+                                                                $('#User_ID').val(rowData.User_ID);
+                                                                $("#Message").html("");
+                                                                $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ویرایش</span>");
+                                                            }
+                                                        });
+                                                    });
+                                                            </script>
+
+                                                            <script type="text/javascript">
+                            var selectedIds = [];
+
+                            $(document).ready(function() {
+
+                                function IsFormValid() {
+
+                                    var alph_patt = /^[a-zA-Z ضصيكثقفغعهخحجچپشسیبلاتنمکگظطزرژءذدئوآ]*$/;
+                                    var num_patt = /^[0-9]*$/;
+                                    var alphnumeric = /^[a-zA-Z ضصيكثقفغعهخحجچپشسیبلاتنمکگظطزرژءذدئوآ0123456789]*$/;
+                                                            //console.log(alph_patt.test($('#CustomerConnector').val()));
+                                    if ($('#Name').val() == "") {
+                                        ShowModal("لطفاً فیلد نام کاربر را پر کنید")
+                                        return false;
+                                    }
+                                    else if (!alph_patt.test($('#Name').val())) {
+                                        ShowModal("فیلد نام کاربر حاوی کاراکتر غیرمجاز است")
+                                        return false;
+                                    }
+                                    else if ($('#LastName').val() == "") {
+                                        ShowModal("لطفاً فیلد نام خانوادگی کاربر را پر کنید")
+                                        return false;
+                                    }
+                                    else if (!alph_patt.test($('#LastName').val())) {
+                                        ShowModal("فیلد نام خانوادگی کاربر حاوی کاراکتر غیرمجاز است")
+                                        return false;
+                                    }
+                                    else if ($('#UserName').val() == "") {
+                                        ShowModal("لطفاً فیلد نام کاربری را پر کنید")
+                                        return false;
+                                    }
+                                    else if ($('#Password').val() == "") {
+                                        ShowModal("لطفاً فیلد پسورد را پر کنید")
+                                        return false;
+                                    }
+                                    else if ($('#PersonelID').val() == "") {
+                                        ShowModal("لطفاً فیلد شماره پرسنلی را پر کنید")
+                                        return false;
+                                    }
+                                    else if (!num_patt.test($('#PersonelID').val())) {
+                                        ShowModal("فیلد شماره پرسنلی حاوی کاراکتر غیرمجاز است")
+                                        return false;
+                                    }
+                                    else if ($('#IsActive_ID').val() == "") {
+                                        ShowModal("لطفاً وضعیت را انتخاب کنید")
+                                        return false;
+                                    }
+                                    else if ($('#Section_ID').val() == "") {
+                                        ShowModal("لطفاً سمت را انتخاب کنید")
+                                        return false;
+                                    }
+
+                                    return true;
+                                }
+
+                                function ShowModal(txt) {
+                                    $("#modalcontent").html(txt);
+                                    $('#myModal').modal();
+                                }
+
+                                //search button
+                                $('#Btn_Submit').click(function () {
+                                    var data1 = $('form').serialize();
+                                    $("#Message").html("");
+                                    if (!IsFormValid())
+                                    {
+                                        $('#myModal').modal();
+                                        return false;
+                                    }
+                                    else {
+                                        console.log($("#User_ID").val());
+                                        if (!$("#User_ID").val()) {
+                                            
+                                            $.ajax({
+                                                url: '@Url.Action("CheckUsername","User")',
+                                                type: 'POST',
+                                                data: data1,
+                                                success: function (Data) {
+                                                    $("#Message").html("<text style='color:" + Data.ExtraData.MessageColor + "'>" + Data.ExtraData.Message + "</text>");
+                                                    if (Data.ExtraData.MessageColor == "green") {
+                                                        console.log(Data.ExtraData.MessageColor);
+                                                        $.ajax({
+                                                            url: '@Url.Action("SubmitUser","User")',
+                                                            type: 'POST',
+                                                            data: data1,
+                                                            success: function (Data) {
+                                                                $("#Message").html("<text style='color:" + Data.ExtraData.MessageColor + "'>" + Data.ExtraData.Message + "</text>");
+                                                                $("#myform").trigger("reset");
+                                                                $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ثبت</span>");
+                                                                $('#user-grid').data('kendoGrid').dataSource.read();
+                                                                $('#user-grid').data('kendoGrid').refresh();
+                                                                console.log("gggg");
+                                                            },
+                                                        }).done(function () {
+                                                            
+                                                        });
+                                                    }
+                                                },
+                                            }).done(function () {
+
+                                            });
+                                        }
+                                        else {
+                                            $.ajax({
+                                                url: '@Url.Action("SubmitUser","User")',
+                                                type: 'POST',
+                                                data: data1,
+                                                success: function (Data) {
+                                                    $("#Message").html("<text style='color:" + Data.ExtraData.MessageColor + "'>" + Data.ExtraData.Message + "</text>");
+                                                },
+                                            }).done(function () {
+                                                $("#myform").trigger("reset");
+                                                $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ثبت</span>");
+                                                $('#user-grid').data('kendoGrid').dataSource.read();
+                                                $('#user-grid').data('kendoGrid').refresh();
+                                                console.log("5555");
+                                            });
+                                        }
+
+                                    }
+                                    return false;
+                                });
+
+                                $('#Btn_New').click(function () {
+                                    $('form').trigger("reset");
+                                    $("#Message").html("");
+                                    $("#User_ID").val("");
+                                    $('#Btn_Submit').html("<i class='fa fa-save'></i ><span style='font-family:nazanin; font-size:large; font-weight:bold;'> ثبت</span>");
+                                    $('#user-grid').data('kendoGrid').dataSource.read();
+                                    $('#user-grid').data('kendoGrid').refresh();
+                                    });
+
+                                $('#Btn_Search').click(function () {
+                                    //search
+                                    $("#Message").html("");
+                                    var grid = $('#user-grid').data('kendoGrid');
+                                    grid.dataSource.page(1); //new search. Set page size to 1
+                                    //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                    //clear selected checkboxes
+                                    $('.checkboxGroups').attr('checked', false).change();
+                                    selectedIds = [];
+                                    return false;
+                                });
+
+                                @*$("#@Html.FieldIdFor(model => model.Message)").keydown(function(event) {
+                                    if (event.keyCode == 13) {
+                                        $("#search-log").click();
+                                        return false;
+                                    }
+                                });*@
+
+                                //"delete selected" button
+                                $('#delete-selected').click(function(e) {
+                                    e.preventDefault();
+
+                                    var postData = {
+                                        selectedIds: selectedIds
+                                    };
+                                    addAntiForgeryToken(postData);
+
+                                    $.ajax({
+                                        cache: false,
+                                        type: "POST",
+                                        url: "@(Url.Action("DeleteSelected", "Log"))",
+                                        data: postData,
+                                        complete: function(data) {
+                                            //reload grid
+                                            var grid = $('#log-grid').data('kendoGrid');
+                                            grid.dataSource.page(1); //new search. Set page size to 1
+                                            //grid.dataSource.read(); we already loaded the grid above using "page" function
+                                            //clear selected checkboxes
+                                            $('.checkboxGroups').attr('checked', false).change();
+                                            selectedIds = [];
+                                        },
+                                        error: function(xhr, ajaxOptions, thrownError) {
+                                            alert(thrownError);
+                                        },
+                                        traditional: true
+                                    });
+                                    return false;
+                                });
+
+                                $('#mastercheckbox').click(function() {
+                                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                                });
+
+                                //wire up checkboxes.
+                                $('#log-grid').on('change', 'input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]', function(e) {
+                                    var $check = $(this);
+                                    if ($check.is(":checked") == true) {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked == -1) {
+                                            //add id to selectedIds.
+                                            selectedIds.push($check.val());
+                                        }
+                                    } else {
+                                        var checked = jQuery.inArray($check.val(), selectedIds);
+                                        if (checked > -1) {
+                                            //remove id from selectedIds.
+                                            selectedIds = $.grep(selectedIds, function(item, index) {
+                                                return item != $check.val();
+                                            });
+                                        }
+                                    }
+                                    updateMasterCheckbox();
+                                });
+                            });
+
+                            function additionalData() {
+                                var data = {
+                                    Name: $('#@Html.FieldIdFor(model => model.Name)').val(),
+                                    LastName: $('#@Html.FieldIdFor(model => model.LastName)').val(),
+                                    PersonelID: $('#@Html.FieldIdFor(model => model.PersonelID)').val(),
+                                    UserName: $('#@Html.FieldIdFor(model => model.UserName)').val(),
+                                    Section_ID: $('#@Html.FieldIdFor(model => model.Section_ID)').val(),
+                                    IsActive_ID: $('#@Html.FieldIdFor(model => model.IsActive_ID)').val(),
+                                    User_ID: $('#@Html.FieldIdFor(model => model.User_ID)').val()
+
+                                };
+                                addAntiForgeryToken(data);
+                                return data;
+                            }
+
+                            function onDataBound(e) {
+                                $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').each(function() {
+                                    var currentId = $(this).val();
+                                    var checked = jQuery.inArray(currentId, selectedIds);
+                                    //set checked based on if current checkbox's value is in selectedIds.
+                                    $(this).attr('checked', checked > -1);
+                                });
+
+                                updateMasterCheckbox();
+                            }
+
+                            function updateMasterCheckbox() {
+                                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]').length;
+                                var numChkBoxesChecked = $('#log-grid input[type=checkbox][id!=mastercheckbox][class=checkboxGroups]:checked').length;
+                                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                            }
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                            <td style="width:4%; height:20%">
+                                                <label ID="Lbl_3" Width="20px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_3
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <td style="width:60%; height:60%">
+                                                <label ID="Lbl_20" Width="60px"
+                                                       Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                                    test_20
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </fieldset>
+                            </div>
+                        </td>
+                        <td style="width:20%; height:20%"></td>
+                    </tr>
+                    <tr style="width: 100%; height:20%">
+                        <td style="width:20%; height:20%">
+                            <label ID="Lbl_1" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_1
+                            </label>
+                        </td>
+                        <td style="width:60%; height:60%">
+                            <label ID="Lbl_2" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_2
+                            </label>
+                        </td>
+                        <td style="width:20%; height:20%">
+                            <label ID="Lbl_3" Width="60px"
+                                   Font-Size="Medium" Font-Names="B nazanin" style="text-align: center; visibility:hidden;" Font-Bold="False">
+                                test_3
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
